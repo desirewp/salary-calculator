@@ -1,0 +1,21 @@
+.settings__container {
+  margin: 20px 0;
+}
+
+label {
+  color: white;
+}
+
+select,
+input {
+  display: block;
+  border-radius: 5px;
+  height: 45px;
+  width: 400px;
+}
+
+.settings__form-input-container {
+  margin: 10px 0;
+}
+
+

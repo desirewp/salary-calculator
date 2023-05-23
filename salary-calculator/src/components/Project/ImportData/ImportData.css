@@ -1,0 +1,13 @@
+.radioBtns{
+    display: flex;
+    justify-content: space-between;
+}
+
+label{
+    color: white;
+}
+
+.invisble-text{
+    color: black;
+    text-align: center;
+}
