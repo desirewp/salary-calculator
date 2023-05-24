@@ -1,0 +1,23 @@
+.box{
+    border-radius: 5px;
+    background: #343434;
+    padding: 1.5rem;
+}
+
+.row{
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.row>.box{
+    width: 100%;
+    min-height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
