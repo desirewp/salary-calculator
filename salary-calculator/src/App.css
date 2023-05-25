@@ -8,6 +8,11 @@ body{
   background-color: #1F1F1F;
 }
 
+main{
+  display: flex;
+  width: 100%;
+}
+
 h1, h2, h3, p, a{
   color: #E6E6E6;
 }

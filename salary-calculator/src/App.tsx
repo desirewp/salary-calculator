@@ -1,14 +1,13 @@
 import React from "react";
 import "./App.css";
-import ProjectScreen from "./components/Views/ProjectScreen";
-import StartScreen from "./components/Views/Start/StartScreen";
+import RootPage from "./components/Views/Root/RootPage";
 
 function App() {
+ 
   return (
-    <div>
-      <StartScreen></StartScreen>
-      {/* <ProjectScreen></ProjectScreen> */}
-    </div>
+    <>
+    <RootPage/>
+    </>
   );
 }
 

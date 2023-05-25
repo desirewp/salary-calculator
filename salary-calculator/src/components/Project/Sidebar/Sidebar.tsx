@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Sidebar.css";
 
 interface ISidebar{
@@ -13,23 +14,24 @@ const completed = (status : boolean) => {
  }
 
   const handleOpenHelp = () => {
+    // Sätter showHelpbar i ProjectScreen to 'block' vilket gör att man ser hjälpfliken
     openHelp();
   };
 
   return (
     <div className="sidebar-container">
       <div>
-          <a href="#">⬅Projects</a>
+          <Link to="/dashboard">⬅Projects</Link>
           <h2>{projectName}</h2>
         <div className="todo-list">
           <h3>TO DO (do-do-do)</h3>
           <hr />
           <ul>
             <li>
-              <a href="#">{completed(completionStatusSettings)} Settings</a>
+              <Link to="project/settings">{completed(completionStatusSettings)} Settings</Link>
             </li>
             <li>
-              <a href="#">{completed(false)} Import data</a>
+              <Link to="/project/import-data">{completed(false)} Import data</Link>
             </li>
             <li>
               <a href="#">{completed(false)} Control data</a>

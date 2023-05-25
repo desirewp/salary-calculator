@@ -1,17 +1,16 @@
-.helpbar-container-wrapper{
-    height: 100vh;
-    width: 380px;
-    
+.helpbar-container-wrapper {
+  height: 100vh;
+  width: 400px;
 }
 
 .helpbar-container {
-height: 100%;
-    padding: 10px 25px;
-  background-color: #1f1f1f;
+  height: 100%;
+  padding: 10px 25px;
+  background-color: #343434;
 }
 
-.closeBtn{
-  background-color: #1f1f1f;
+.closeBtn {
+  background-color: #343434;
   color: white;
   border: none;
   font-size: 24px;
