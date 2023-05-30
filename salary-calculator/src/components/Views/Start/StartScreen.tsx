@@ -15,9 +15,9 @@ const StartScreen = () => {
       <div className="box">
         <div className="flex-container-row">
           <h2>Projects</h2>
-          {/* <Link to="/project">
+          <Link to="/project">
             <button>New project</button>
-          </Link> */}
+          </Link>
         </div>
         <table>
           <thead>

@@ -10,7 +10,7 @@ const ImportData = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1 className="content__heading">Import Data</h1>
       <div className="radioBtns">
         <div>

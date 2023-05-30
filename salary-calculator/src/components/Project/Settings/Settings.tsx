@@ -64,8 +64,8 @@ const Settings = () => {
   };
 
   // _______________HTML ELEMNTS__________________________
-  const selectOptions = yearsArray.map((year) => {
-    return <option value={year}>{year}</option>;
+  const selectOptions = yearsArray.map((year, index) => {
+    return <option key={index} value={year}>{year}</option>;
   });
 
   return (

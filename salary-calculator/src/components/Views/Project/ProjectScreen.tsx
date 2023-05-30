@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import Content from "../../Project/Content";
 import Helpbar from "../../Project/Helpbar/Helpbar";
 import Sidebar from "../../Project/Sidebar/Sidebar";
-import { useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import Project, { projects } from "../../../assets/Classes";
+
+interface IProjectScreen {}
 
 const ProjectScreen = () => {
   const { projectId } = useParams();
@@ -15,7 +16,6 @@ const ProjectScreen = () => {
     setShowHelpbar("block");
   };
 
-
   // Hämtar rätt projekt från exempeldatan och lägger det i useSate variabeln project
   const getProject = () => {
     const gottenProject = projects.filter((project) => {
@@ -26,15 +26,17 @@ const ProjectScreen = () => {
   };
 
   useEffect(() => {
-    getProject();
+    // getProject();
   }, []);
 
   return (
     <div className="flex-container-row">
       {/* <p>{project.id}</p> */}
-      <Sidebar openHelp={openHelp} /* projectId={projectId} */ />
-      <Content />
-      <Helpbar showHelpbar={showHelpbar} setShowHelpbar={setShowHelpbar} />
+      <Sidebar openHelp={openHelp} />
+      <section>
+        <Outlet />
+      </section>
+      <Helpbar showHelpbar={showHelpbar} setShowHelpbar={setShowHelpbar}/>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./Sidebar.css";
 import Project, { projects } from "../../../assets/Classes";
 
@@ -9,6 +9,8 @@ interface ISidebar {
 }
 
 const Sidebar = ({ openHelp /* projectId  */ }: ISidebar) => {
+  const { projectId } = useParams();
+  
   const projectName: string = "2022HT";
   let completionStatusSettings: boolean = true;
 
@@ -35,12 +37,12 @@ const Sidebar = ({ openHelp /* projectId  */ }: ISidebar) => {
           <hr />
           <ul>
             <li>
-              <Link to="project/settings">
+              <Link to={`/project/${projectId}/settings`}>
                 {completed(completionStatusSettings)} Settings
               </Link>
             </li>
             <li>
-              <Link to="/project/import-data">
+              <Link to={`/project/${projectId}/import-data`}>
                 {completed(false)} Import data
               </Link>
             </li>

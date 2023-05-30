@@ -1,6 +1,12 @@
+.container{
+    width: 300px;
+    margin: 20px 0;
+    /* width: 100%; */
+}
+
 .radioBtns{
-    display: flex;
-    justify-content: space-between;
+    /* display: flex; */
+    /* justify-content: space-between; */
 }
 
 label{

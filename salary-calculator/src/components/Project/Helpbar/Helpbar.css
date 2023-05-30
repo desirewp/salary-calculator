@@ -1,6 +1,6 @@
 .helpbar-container-wrapper {
   height: 100vh;
-  width: 400px;
+  min-width: 400px;
 }
 
 .helpbar-container {
