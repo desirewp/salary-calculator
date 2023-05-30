@@ -8,16 +8,16 @@ import { projects } from "../../../assets/Classes";
 
 const StartScreen = () => {
   return (
-    <section>
-      <div>
+    <main>
+      <div className="text-center">
         <h1>PayDay Calculator</h1>
       </div>
       <div className="box">
         <div className="flex-container-row">
           <h2>Projects</h2>
-          <Link to="/project">
+          {/* <Link to="/project">
             <button>New project</button>
-          </Link>
+          </Link> */}
         </div>
         <table>
           <thead>
@@ -52,7 +52,7 @@ const StartScreen = () => {
           <tbody>
             {projects.map((project) => {
               return (
-                <tr>
+                <tr key={project.id}>
                   <td>
                     <p>{project.status}</p>
                   </td>
@@ -63,7 +63,7 @@ const StartScreen = () => {
                     <p>{project.created}</p>
                   </td>
                   <td>
-                    <Link to="">
+                    <Link  to={`/project/${project.id}`}>
                       <button >Open</button>
                       </Link>
                   </td>
@@ -84,7 +84,7 @@ const StartScreen = () => {
           <h2>Expenses</h2>
         </div>
       </div>
-    </section>
+    </main>
   );
 };
 

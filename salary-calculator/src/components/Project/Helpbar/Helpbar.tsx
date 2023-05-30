@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Helpbar.css";
-import SettingsHelpContent from "./Settings/SettingsHelpContent";
+import SettingsHelpContent from "../Settings/SettingsHelpContent";
 
 interface IHeplbar{
   showHelpbar : string;

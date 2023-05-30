@@ -9,8 +9,9 @@ body{
 }
 
 main{
-  display: flex;
-  width: 100%;
+  min-width: 500px;
+  padding: 1% 2%;
+  margin: 20px 400px;
 }
 
 h1, h2, h3, p, a{
@@ -22,4 +23,8 @@ h1, h2, h3, p, a{
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+
+.text-center{
+  text-align: center;
 }
