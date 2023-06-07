@@ -29,7 +29,7 @@ export const projects: Project[] = [
   new Project("iuvczbysclx","done", "vt 2021", "2021-06-14"),
 ];
 
-export const instructors : Instructor[] = [
+export const instructors2023 : Instructor[] = [
   new Instructor('abcdizicbi', 'Björn', 'Löfstrand', 'bjorn@dansarna.se'),
   new Instructor('abcdiscvzicbi', 'Caroline', 'Eng','caroline@dansarna.se'),
   new Instructor('abcdimnzicbi', 'Desirée', 'Persson', 'desiree@dansarna.se'),

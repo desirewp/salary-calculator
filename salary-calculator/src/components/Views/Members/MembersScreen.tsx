@@ -2,6 +2,8 @@ import { useState } from "react";
 import Sidebar from "../../Project/Sidebar/Sidebar";
 import "./MembersScreen.css";
 import Helpbar from "../../Project/Helpbar/Helpbar";
+// Är vår statiska lista med instruktörer
+import { instructors2023 } from "../../../assets/Classes";
 
 const MemberScreen = () => {
   const [showHelpbar, setShowHelpbar] = useState<string>("none");
@@ -15,25 +17,47 @@ const MemberScreen = () => {
     <div className="content-container">
       <Sidebar openHelp={openHelp} />
       <section className="content">
-        
         <div className="box">
-          <h1>Heeeeej</h1>
-          <table>
+          <h1>Instructors 2023</h1>
+          <table className="instructors-table">
             <thead>
               <tr>
-                <th>Name</th>
-                    
-                <th>Email</th>
-            
-                <th>SSN</th>
+                <th>
+                  <p>
+                    Name
+                    <span className="material-symbols-outlined">
+                      arrow_drop_down
+                    </span>
+                  </p>
+                </th>
+                <th>
+                  <p>
+                    Email
+                    <span className="material-symbols-outlined">
+                      arrow_drop_down
+                    </span>
+                  </p>
+                </th>
               </tr>
             </thead>
-          <tbody>
-            
-          </tbody>
+            <tbody>
+              {instructors2023.map((instructor) => {
+                return (
+                  <tr>
+                    <td>
+                      <p>
+                        {instructor.fName} {instructor.lName}
+                      </p>
+                    </td>
+                    <td>
+                      <p>{instructor.email}</p>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
           </table>
         </div>
-      
       </section>
       <Helpbar showHelpbar={showHelpbar} setShowHelpbar={setShowHelpbar} />
     </div>

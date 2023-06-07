@@ -16,3 +16,25 @@
     background: #343434;
     padding: 1.5rem;
 }
+
+
+.instructors-table{
+    margin: 5px;
+    border-collapse: collapse;
+}
+
+.instructors-table th, .instructors-table td{
+    padding: 4px;
+}
+
+th{
+    text-align: left;
+}
+
+.instructors-table tr:nth-child(odd){
+    background: #1F1F1F;
+}
+
+.instructors-table tr:hover{
+    background: #4e4e4e;
+}

@@ -16,10 +16,6 @@ const Sidebar = ({ openHelp }: ISidebar) => {
     return status ? "✅" : "🟥";
   };
 
-  // projectId === undefined
-  //   ? alert("visa meny för instructors")
-  //   : alert("Ska visa vanliga menyn");
-
   //  ------------Event Handlers ----------------------------
   const handleOpenHelp = () => {
     // Sätter showHelpbar i ProjectScreen to 'block' vilket gör att man ser hjälpfliken
