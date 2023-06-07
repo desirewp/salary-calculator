@@ -6,6 +6,7 @@ import StartScreen from "../Start/StartScreen";
 import ErrorScreen from "../ErrorScreen/ErrorScreen";
 import Settings from "../../Project/Settings/Settings";
 import ImportData from "../../Project/ImportData/ImportData";
+import MembersScreen from "../Members/MembersScreen";
 
 const router = createBrowserRouter([
   { path: "/", element: <StartScreen />, errorElement: <ErrorScreen /> },
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  { path: "/members", element: <MembersScreen /> },
   // { path: "/*", element: <ErrorScreen /> },
 ]);
 

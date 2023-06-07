@@ -74,8 +74,11 @@ const StartScreen = () => {
         </table>
       </div>
       <div className="flex-container-row row">
+
         <div className="box">
+        <Link to="/members">
           <h2>Instructors</h2>
+        </Link>
         </div>
         <div className="box">
           <h2>Offsets</h2>

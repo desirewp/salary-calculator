@@ -1,0 +1,18 @@
+.content-container {
+  display: grid;
+  grid-template-columns: 400px 2fr 1fr;
+  grid-template-areas: ". content .";
+}
+
+
+.content {
+    margin: 20px;
+  grid-area: content;
+}
+
+
+.box{
+    border-radius: 5px;
+    background: #343434;
+    padding: 1.5rem;
+}

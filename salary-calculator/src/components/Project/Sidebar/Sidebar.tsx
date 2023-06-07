@@ -4,13 +4,11 @@ import Project, { projects } from "../../../assets/Classes";
 
 interface ISidebar {
   openHelp(): void;
-  // PROBLEM: ProjectId kan vara undefined
-  // projectId: string | undefined;
 }
 
-const Sidebar = ({ openHelp /* projectId  */ }: ISidebar) => {
+const Sidebar = ({ openHelp }: ISidebar) => {
   const { projectId } = useParams();
-  
+
   const projectName: string = "2022HT";
   let completionStatusSettings: boolean = true;
 
@@ -18,7 +16,9 @@ const Sidebar = ({ openHelp /* projectId  */ }: ISidebar) => {
     return status ? "✅" : "🟥";
   };
 
-
+  // projectId === undefined
+  //   ? alert("visa meny för instructors")
+  //   : alert("Ska visa vanliga menyn");
 
   //  ------------Event Handlers ----------------------------
   const handleOpenHelp = () => {
@@ -26,48 +26,81 @@ const Sidebar = ({ openHelp /* projectId  */ }: ISidebar) => {
     openHelp();
   };
 
+  // ----------------HTML Element------------------------------
+  const projectContent = (
+    <>
+      <h2>{projectName}</h2>
+
+      <div className="todo-list">
+        <h3>TO DO (do-do-do)</h3>
+        <hr />
+        <ul>
+          <li>
+            <Link to={`/project/${projectId}/settings`}>
+              {completed(completionStatusSettings)} Settings
+            </Link>
+          </li>
+          <li>
+            <Link to={`/project/${projectId}/import-data`}>
+              {completed(false)} Import data
+            </Link>
+          </li>
+          <li>
+            <a href="#">{completed(false)} Control data</a>
+          </li>
+          <li>
+            <a href="#">{completed(false)} Freeze data</a>
+          </li>
+        </ul>
+        <hr />
+        <ul>
+          <li>
+            <a href="#">{completed(false)} Calculate salaries</a>
+          </li>
+          <li>
+            <a href="#">{completed(false)} Confirm salaries</a>
+          </li>
+          <li>
+            <a href="#">{completed(false)} Freeze salaries</a>
+          </li>
+        </ul>
+        <hr />
+        <ul>
+          <li>
+            <a href="#">▶ Export salary report</a>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+
+  const instructorContent = (
+    <>
+      <h2>Instructors</h2>
+      <div className="todo-list">
+        {/* <h3>TO DO (do-do-do)</h3> */}
+        <hr />
+        <ul>
+          <li>
+            <a href="#">▶ Export instructors</a>
+          </li>
+          <li>
+            <a href="#">▶ Add instructor</a>
+          </li>
+        </ul>
+        <hr />
+      </div>
+    </>
+  );
+
   return (
     <div className="sidebar-container">
       <div>
         <Link to="/dashboard">⬅Projects</Link>
-        {/* <p>{project.id}</p> */}
-        <h2>{projectName}</h2>
-        <div className="todo-list">
-          <h3>TO DO (do-do-do)</h3>
-          <hr />
-          <ul>
-            <li>
-              <Link to={`/project/${projectId}/settings`}>
-                {completed(completionStatusSettings)} Settings
-              </Link>
-            </li>
-            <li>
-              <Link to={`/project/${projectId}/import-data`}>
-                {completed(false)} Import data
-              </Link>
-            </li>
-            <li>
-              <a href="#">{completed(false)} Control data</a>
-            </li>
-            <li>
-              <a href="#">{completed(false)} Freeze data</a>
-            </li>
-          </ul>
-          <hr />
-          <ul>
-            <li>
-              <a href="#">{completed(false)} Calculate salaries</a>
-            </li>
-            <li>
-              <a href="#">{completed(false)} Confirm salaries</a>
-            </li>
-            <li>
-              <a href="#">{completed(false)} Freeze salaries</a>
-            </li>
-          </ul>
-          <hr />
-          <a href="#">▶ Export salary report</a>
-        </div>
+        {/* Ifall man är inne på ett redan existeraande projekt som har ett id via params 
+        så kommer innehållet i sidebar vara det för projektet annar visas innehållet för instruktörs-sidans sidebar.
+        Kommer behöver bättras på med snyggare logik när man ska kunna skapa ett helt tomt projekt och det ska finnas flera main level pages (Offsets & expenses)? */}
+        {projectId === undefined ? instructorContent : projectContent}
       </div>
       <div className="sidebar__bottom-nav">
         <a href="#" onClick={handleOpenHelp}>
