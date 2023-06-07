@@ -21,11 +21,7 @@ const ImportData = () => {
           <input type="radio" name="file-content" id="participants" />
           <label htmlFor="participants">Participants</label>
         </div>
-        <div>
-          <input type="radio" name="file-content" id="instructors" />
-          <label htmlFor="instructors">Instructors</label>
         </div>
-      </div>
       <br />
 
       <div className="upload-bar">
@@ -45,7 +41,6 @@ const ImportData = () => {
     <button>Delete events</button>
     <button>Delete students</button>
     <br />
-    <button>Delete instructors</button>
     <button>Delete all data</button>
 
     </div>

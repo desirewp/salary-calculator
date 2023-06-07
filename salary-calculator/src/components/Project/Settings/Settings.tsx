@@ -92,6 +92,7 @@ const Settings = () => {
             <option value="VT">Spring</option>
             <option value="ST">Summer</option>
             <option value="HT">Atumn</option>
+            <option value="S&HT">Summer & Atumn</option>
 
           </select>
         </div>
