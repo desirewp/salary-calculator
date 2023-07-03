@@ -1,0 +1,28 @@
+.box {
+    border-radius: 5px;
+    background: #343434;
+    padding: 1.5rem;
+  }
+  
+  .events-table {
+    margin: 5px;
+    border-collapse: collapse;
+  }
+  
+  .events-table th,
+  .events-table td {
+    padding: 4px;
+  }
+  
+  th {
+    text-align: left;
+  }
+  
+  .events-table tr:nth-child(odd) {
+    background: #1f1f1f;
+  }
+  
+  .events-table tr:hover {
+    background: #4e4e4e;
+  }
+  

@@ -7,6 +7,7 @@ import ErrorScreen from "../ErrorScreen/ErrorScreen";
 import Settings from "../../Project/Settings/Settings";
 import ImportData from "../../Project/ImportData/ImportData";
 import MembersScreen from "../Members/MembersScreen";
+import Events from "../../Project/Events/Events";
 
 const router = createBrowserRouter([
   { path: "/", element: <StartScreen />, errorElement: <ErrorScreen /> },
@@ -25,6 +26,11 @@ const router = createBrowserRouter([
       {
         path: "/project/:projectId/import-data",
         element: <ImportData/>,
+        errorElement: <ErrorScreen />,
+      },
+      {
+        path: "/project/:projectId/event-data",
+        element: <Events/>,
         errorElement: <ErrorScreen />,
       },
     ],

@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import "./Sidebar.css";
-import Project, { projects } from "../../../assets/Classes";
+// import Project, { projects } from "../../../assets/Classes";
 
 interface ISidebar {
   openHelp(): void;
@@ -9,7 +9,7 @@ interface ISidebar {
 const Sidebar = ({ openHelp }: ISidebar) => {
   const { projectId } = useParams();
 
-  const projectName: string = "2022HT";
+  const projectName = "2022HT";
   let completionStatusSettings: boolean = true;
 
   const completed = (status: boolean) => {
@@ -42,7 +42,9 @@ const Sidebar = ({ openHelp }: ISidebar) => {
             </Link>
           </li>
           <li>
-            <a href="#">{completed(false)} Control data</a>
+            <Link to={`/project/${projectId}/event-data`}>
+              {completed(false)} Control events
+            </Link>
           </li>
           <li>
             <a href="#">{completed(false)} Freeze data</a>
@@ -74,7 +76,6 @@ const Sidebar = ({ openHelp }: ISidebar) => {
     <>
       <h2>Instructors</h2>
       <div className="todo-list">
-        {/* <h3>TO DO (do-do-do)</h3> */}
         <hr />
         <ul>
           <li>
@@ -98,6 +99,7 @@ const Sidebar = ({ openHelp }: ISidebar) => {
         Kommer behöver bättras på med snyggare logik när man ska kunna skapa ett helt tomt projekt och det ska finnas flera main level pages (Offsets & expenses)? */}
         {projectId === undefined ? instructorContent : projectContent}
       </div>
+      {/* Nedre delen som innehåller Om & Hjälp fliken är samma för varje sidn men ger olika innehåll när man öppnar den*/}
       <div className="sidebar__bottom-nav">
         <a href="#" onClick={handleOpenHelp}>
           Halp

@@ -4,37 +4,35 @@
   grid-template-areas: ". content .";
 }
 
-
 .content {
-    margin: 20px;
+  margin: 20px;
   grid-area: content;
 }
 
-
-.box{
-    border-radius: 5px;
-    background: #343434;
-    padding: 1.5rem;
+.box {
+  border-radius: 5px;
+  background: #343434;
+  padding: 1.5rem;
 }
 
-
-.instructors-table{
-    margin: 5px;
-    border-collapse: collapse;
+.instructors-table {
+  margin: 5px;
+  border-collapse: collapse;
 }
 
-.instructors-table th, .instructors-table td{
-    padding: 4px;
+.instructors-table th,
+.instructors-table td {
+  padding: 4px;
 }
 
-th{
-    text-align: left;
+th {
+  text-align: left;
 }
 
-.instructors-table tr:nth-child(odd){
-    background: #1F1F1F;
+.instructors-table tr:nth-child(odd) {
+  background: #1f1f1f;
 }
 
-.instructors-table tr:hover{
-    background: #4e4e4e;
+.instructors-table tr:hover {
+  background: #4e4e4e;
 }
