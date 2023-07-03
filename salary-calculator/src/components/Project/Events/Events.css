@@ -26,3 +26,16 @@
     background: #4e4e4e;
   }
   
+  .flex-row-between{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+.material-symbols-outlined{
+  color: #E6E6E6;
+  cursor: pointer;
+}
+.material-symbols-outlined:hover{
+color:  #1f1f1f
+}

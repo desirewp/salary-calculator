@@ -1,8 +1,13 @@
-import { eventsVT22, instructors2023 } from "../../../assets/Classes";
+import { eventsVT22, Instructor, instructors2023 } from "../../../assets/Classes";
 import "./Events.css";
 
 const Events = () => {
-  const getInstructorName = (instructorId: string) => {
+  const formatInstructorName = (instructor : Instructor) => { 
+    return `${instructor.fName} ${instructor.lName}`
+   }
+
+
+  const getInstructorNameById = (instructorId: string) => {
     // Hittar den instruktör som matchar idt kopplat på kursen
     const instructor = instructors2023.find(
       (instructor) => instructorId == instructor.id
@@ -20,12 +25,12 @@ const Events = () => {
       return "No instructor found";
     } else if (instructors.length > 1) {
       const instructorArray = instructors.map((instructor) => {
-        return getInstructorName(instructor);
+        return getInstructorNameById(instructor);
       });
       return (instructorText = instructorArray.join(", "));
     } else {
       instructorArray = instructors.map((instructor) => {
-        return getInstructorName(instructor);
+        return getInstructorNameById(instructor);
       });
       return (instructorText = instructorArray.join(","));
     }
@@ -72,7 +77,7 @@ const Events = () => {
               </th>
               <th>
                 <p>
-                  Course lenght
+                  Course length
                   <span className="material-symbols-outlined">
                     arrow_drop_down
                   </span>
@@ -116,16 +121,22 @@ const Events = () => {
                     <p>{event.lessons * event.lessonLength} h</p>
                   </td>
                   <td>
-                    <p>{event.price}</p>
+                    <p>{event.price} SEK</p>
                   </td>
-                  <td>
-                    <p>{checkForInstructors(event.instructors)}</p>
+                  <td className="flex-row-between">
+                    <p>{checkForInstructors(event.instructors)} </p>
+                    <span class="material-symbols-outlined">edit_document</span>
                   </td>
                 </tr>
               );
             })}
           </tbody>
         </table>
+
+
+        <select name="" id="">
+          
+        </select>
       </div>
     </section>
   );
