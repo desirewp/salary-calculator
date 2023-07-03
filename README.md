@@ -5,6 +5,4 @@ A hobby project to develop a administrative tool for Dansarna.se
 <ul>
   <li>React Router DOM</li>
   <li>React Aria</li>
-  <ul/>
-
-
+</ul>
