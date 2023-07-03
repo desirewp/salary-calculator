@@ -2,13 +2,26 @@ export default class Project {
   constructor(
     public id: string,
     public status: string,
+    public year: number,
     public semester: string,
     public created: string
   ) {
     this.id = id;
     this.status = status;
+    this.year = year;
     this.semester = semester;
     this.created = created;
+  }
+}
+
+export class Event{
+  constructor(public id: string, public eventName: string, public lessons: number, public lessonLength: number, public price: number, public instructors: string[]){
+    this.id = id;
+    this.eventName = eventName;
+    this.lessons = lessons;
+    this.lessonLength = lessonLength;
+    this.price = price;
+    this.instructors = instructors;
   }
 }
 
@@ -23,11 +36,16 @@ export class Instructor {
 
 // Fake projects
 export const projects: Project[] = [
-  new Project("dbi41615156","done", "ht 2022", "2022-12-14"),
-  new Project("ocnibciubigfd","in progress", "vt 2022", "2022-06-04"),
-  new Project("djoocnoo4","waiting", "ht 2021", "2021-12-14"),
-  new Project("iuvczbysclx","done", "vt 2021", "2021-06-14"),
+  new Project("dbi41615156","done", 2022, "ht",  "2022-12-14"),
+  new Project("ocnibciubigfd","in progress", 2022, "vt",  "2022-06-04"),
+  new Project("djoocnoo4","waiting", 2021, "ht", "2021-12-14"),
+  new Project("iuvczbysclx","done", 2021,  "vt", "2021-06-14"),
 ];
+
+// Fake courses/events
+export const eventsVT22 : Event[] = [
+ new Event('afaffafgfm', 'Bachata nybörjare', 10, 2, 1600, ['abcd55izicbi', 'abcdvvvizicbi'])
+]
 
 export const instructors2023 : Instructor[] = [
   new Instructor('abcdizicbi', 'Björn', 'Löfstrand', 'bjorn@dansarna.se'),
@@ -49,5 +67,5 @@ export const instructors2023 : Instructor[] = [
   new Instructor('abcdizzzzicbi', 'Raha', 'Omrani', 'raha@dansarna.se'),
   new Instructor('abcdi344zicbi', 'Sandra', 'Boda', 'sandra@dansarna.se'),
   new Instructor('abcd55izicbi', 'Svetlana', 'Löfstrand', 'lana@dansarna.se'),
-
 ]
+
