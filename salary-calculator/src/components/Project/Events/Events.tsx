@@ -1,38 +1,45 @@
-import { eventsVT22, Instructor, instructors2023 } from "../../../assets/Classes";
+import { useState } from "react";
+import {
+  Event,
+  eventsVT22,
+  Instructor,
+  instructors2023,
+} from "../../../assets/Classes";
 import "./Events.css";
+import DropDownCheckboxes from "../../DropDownCheckboxes/DropDownCheckboxes";
 
 const Events = () => {
-  const formatInstructorName = (instructor : Instructor) => { 
-    return `${instructor.fName} ${instructor.lName}`
-   }
+  const [events, setEvents] = useState<Event[]>(eventsVT22);
+  // Bestämmer utseendet på tabellen
+  const [displayEditMode, setDisplayEditMode] = useState<string[]>([]);
 
-
+  // Hämtar om kursen har en giltig instruktör som har bet medlemsavgift
   const getInstructorNameById = (instructorId: string) => {
     // Hittar den instruktör som matchar idt kopplat på kursen
     const instructor = instructors2023.find(
       (instructor) => instructorId == instructor.id
     );
-    if (instructor) {
-      const instructorName = instructor?.fName + " " + instructor?.lName;
-      return instructorName;
-    } else return "Instructor not member";
+    return instructor ? instructor.fullName : "Instructor not member";
   };
 
-  const checkForInstructors = (instructors: string[]) => {
-    let instructorArray: string[];
-    let instructorText: string;
+  const instructorData = (instructors: string[]) => {
     if (instructors.length === 0) {
       return "No instructor found";
-    } else if (instructors.length > 1) {
-      const instructorArray = instructors.map((instructor) => {
-        return getInstructorNameById(instructor);
-      });
-      return (instructorText = instructorArray.join(", "));
+    }
+    const instructorArray = instructors.map(getInstructorNameById);
+    const instructorText = instructorArray.join();
+    return instructorText;
+  };
+
+  // ------------Event handlers----------------
+
+  // 1. När man klickar på knappen ska dropdown menyn visas istället för nuvarande instruktörer
+  const handleEditCourseClick = (eventId: string) => {
+    // alert(`Du vill redigera kursen! ${eventId}`);
+    if (displayEditMode.includes(eventId)) {
+      setDisplayEditMode(displayEditMode.filter((event) => event !== eventId));
     } else {
-      instructorArray = instructors.map((instructor) => {
-        return getInstructorNameById(instructor);
-      });
-      return (instructorText = instructorArray.join(","));
+      setDisplayEditMode([...displayEditMode, eventId]);
     }
   };
 
@@ -102,7 +109,7 @@ const Events = () => {
             </tr>
           </thead>
           <tbody>
-            {eventsVT22.map((event) => {
+            {events.map((event) => {
               return (
                 <tr key={event.id}>
                   <td>
@@ -124,19 +131,37 @@ const Events = () => {
                     <p>{event.price} SEK</p>
                   </td>
                   <td className="flex-row-between">
-                    <p>{checkForInstructors(event.instructors)} </p>
-                    <span class="material-symbols-outlined">edit_document</span>
+                    {displayEditMode.includes(event.id) ? (
+                      <>
+                        <p>{instructorData(event.instructors)}</p>
+                        <span
+                          className="material-symbols-outlined"
+                          onClick={() => {
+                            handleEditCourseClick(event.id);
+                          }}
+                        >
+                          edit_document
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <DropDownCheckboxes />
+                        <span
+                          className="material-symbols-outlined"
+                          onClick={() => {
+                            handleEditCourseClick(event.id);
+                          }}
+                        >
+                          done
+                        </span>
+                      </>
+                    )}
                   </td>
                 </tr>
               );
             })}
           </tbody>
         </table>
-
-
-        <select name="" id="">
-          
-        </select>
       </div>
     </section>
   );

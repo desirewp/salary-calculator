@@ -39,3 +39,7 @@
 .material-symbols-outlined:hover{
 color:  #1f1f1f
 }
+
+.display-none{
+  display: none;
+}
