@@ -1,6 +1,6 @@
 ------🥨Things to do Event-sidan🥨-----
-1.1 När man väljer att edit på event-sidan ska de instruktörer som redan är reggade på eventet vara markerade i checkbox-listan
-1.2 Kunna välja flera instruktörer och lägga till på en kurs (så att dom sparas)
+1.2 Kunna välja instruktörer och lägga till på en kurs (så att dom "sparas")
+1.3 Kunna ta bort existerande instruktörer som är kopplade till en kurs
 
 
 ........Things to do if I want Event-sidan.......
@@ -11,3 +11,4 @@ xxxx.hindra att content scrollas utan att det istället är i tabell-boxen som s
 
 
 ~~~~~~~ 🥦 ~Klart~ 🥦 ~~~~~~~~~
+1.1 När man väljer att edit på event-sidan ska de instruktörer som redan är reggade på eventet vara markerade i checkbox-listan

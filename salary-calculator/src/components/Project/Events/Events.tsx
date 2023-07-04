@@ -2,7 +2,6 @@ import { useState } from "react";
 import {
   Event,
   eventsVT22,
-  Instructor,
   instructors2023,
 } from "../../../assets/Classes";
 import "./Events.css";
@@ -35,7 +34,6 @@ const Events = () => {
 
   // 1. När man klickar på knappen ska dropdown menyn visas istället för nuvarande instruktörer
   const handleEditCourseClick = (eventId: string) => {
-    // alert(`Du vill redigera kursen! ${eventId}`);
     if (displayEditMode.includes(eventId)) {
       setDisplayEditMode(displayEditMode.filter((event) => event !== eventId));
     } else {
@@ -145,7 +143,10 @@ const Events = () => {
                       </>
                     ) : (
                       <>
-                        <DropDownCheckboxes />
+                     {/* Behöver skickas ned som en useState */}
+
+                        <DropDownCheckboxes selectedInstructors={event.instructors} 
+                        />
                         <span
                           className="material-symbols-outlined"
                           onClick={() => {

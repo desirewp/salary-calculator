@@ -1,16 +1,28 @@
 import { useState } from "react";
 import { instructors2023 } from "../../assets/Classes";
 import "./DropDownCeckboxes.css";
-const DropDownCheckboxes = () => {
-  const [selected, setSelected] = useState<String[]>([]);
+
+
+interface IDropDownCheckboxes{
+  selectedInstructors: string[];
+}
+
+// Hela eventet behöver hämtas in som en usestate Variabel
+const DropDownCheckboxes = ({selectedInstructors} : IDropDownCheckboxes ) => {
+  const [selected, setSelected] = useState<String[]>(selectedInstructors);
 
   // ---------- Event handlers -------------------
+
+  // Den här metoden behöver kunna lägga till och ta bort i eventsVT22
   const handleCheckboxChange = (instructorId: string) => {
     if (selected.includes(instructorId)) {
+      // Det här utfallet tar bort instruktören om hen kryssas ur
       setSelected(selected.filter((checkbox) => checkbox !== instructorId));
     } else {
+      // Det här utfallet lägger till instruktören om hen kryssas i.
       setSelected([...selected, instructorId]);
     }
+    alert(selected);
   };
 
   return (
