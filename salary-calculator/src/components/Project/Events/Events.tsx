@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Event, eventsVT22, instructors2023 } from "../../../assets/Classes";
 import "./Events.css";
 import DropDownCheckboxes from "../../DropDownCheckboxes/DropDownCheckboxes";
@@ -6,30 +6,18 @@ import DropDownCheckboxes from "../../DropDownCheckboxes/DropDownCheckboxes";
 const Events = () => {
   // Innehåller de Events som visas aka ordinarie event[]
   const [events, setEvents] = useState<Event[]>(eventsVT22);
+  // Innehåller ny data från formuläret där ett event är uppdaterat
+  const [formDataEvents, setFormDataEvents] = useState<Event[]>(eventsVT22);
 
-
-  // const editInstructors = (instructors: string[], eventId: string) => {
-  //   const updatedEvents = updateEventInstructorsById(instructors, eventId);
-  //   console.log(`här triggas edit Instructors och ${updatedEvents} sparas till newEvents`)
-  //   setNewEvents(updatedEvents);
-  // };
-
-  // Tar in event id för event som ska uppdateras och instruktörerna som det ska uppdateras till
-  // Går sedan in på eventet med rätt id och byter ut dess instruktörer till de/den nya
-  // const updateEventInstructorsById = (
-  //   newInstructors: string[],
-  //   eventId: string
-  // ) => {
-  //   return events.map((event) => {
-  //     if (event.id === eventId) {
-  //       return { ...event, instructors: newInstructors };
-  //     }
-  //     return event;
-  //   });
-  // };
-
- 
- 
+  // Hämtar data från child komponenten och lägger till den i separat useState så att man kan välja om den sa sparas eller ej.
+  const replaceFormData = (eventId: string, newEvent: Event) => {
+    const eventIndex = formDataEvents.findIndex((e) => eventId === e.id);
+    if (eventIndex !== -1) {
+      const updatedEvents = [...events];
+      updatedEvents[eventIndex] = newEvent;
+      setFormDataEvents(updatedEvents);
+    }
+  };
 
   // ------------ UI -------------------
   const toggleEditUI = (eventId: string) => {
@@ -69,15 +57,16 @@ const Events = () => {
     toggleEditUI(eventId);
   };
 
-
   const handleSaveChangesClick = (e: React.FormEvent, eventId: string) => {
     e.preventDefault();
     alert("nu ska saker sparas!");
+    // Nu sakans funktion som trycker in det nya eventet i events från 
+    setEvents(formDataEvents);
     toggleEditUI(eventId);
   };
 
+
   const handleUndoChangesClick = (eventId: string) => {
-    alert("nu ska saker INTE sparas!");
     toggleEditUI(eventId);
   };
 
@@ -164,7 +153,10 @@ const Events = () => {
                     {!event.edit ? (
                       <p>{instructorData(event.instructors)}</p>
                     ) : (
-                      <DropDownCheckboxes event={event} />
+                      <DropDownCheckboxes
+                        event={event}
+                        replaceEvent={replaceFormData}
+                      />
                     )}
                   </td>
 
@@ -180,15 +172,12 @@ const Events = () => {
                       </span>
                     ) : (
                       <div>
-                        <button type="submit">
+                        <button type="button">
                           <span
                             className="material-symbols-outlined"
                             onClick={(e) => {
                               handleSaveChangesClick(e, event.id);
                             }}
-                            //   onClick={() => {
-                            //     handleSaveEditClick(event.id);
-                            //   }}
                           >
                             done
                           </span>

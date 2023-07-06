@@ -1,19 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Event, instructors2023 } from "../../assets/Classes";
 import "./DropDownCeckboxes.css";
 
 interface IDropDownCheckboxes {
   event: Event;
+  replaceEvent(eventId: string, newEvent : Event): void
 }
 
-interface IEventFormData {
-  id: string;
-  instructors: string[];
-}
-
-const DropDownCheckboxes = ({ event }: IDropDownCheckboxes) => {
+const DropDownCheckboxes = ({ event, replaceEvent }: IDropDownCheckboxes) => {
   // Den variabeln som lagrar ändringarna när man kryssar i checkboxarna
-  const [eventFormData, setEventFormData] = useState<IEventFormData>(event);
+  const [eventFormData, setEventFormData] = useState<Event>(event);
   
   // Innehåller alla instruktörer som är valda på kursen innehåller ord. instruktörer vid start
   const [markedInstructors, setMarkedInstructors] = useState<string[]>(
@@ -21,17 +17,15 @@ const DropDownCheckboxes = ({ event }: IDropDownCheckboxes) => {
   );
 
 
-  useEffect(() => {
-    addNewInstructorsToEvent();
-  }, [markedInstructors]);
-
   // Lägger till ändringen i det ordinarie eventet
-  const addNewInstructorsToEvent = () => {
+  const addNewInstructorsToEvent = (updatedMarkedInstructors: string[]) => {
     setEventFormData((prevData) => ({
       ...prevData,
-      instructors: markedInstructors,
+      instructors: updatedMarkedInstructors,
     }));
-    console.log(markedInstructors);
+    console.log(updatedMarkedInstructors);
+    // Denna kod är en callback funktion som skickar upp allt till parent
+    // replaceEvent(event.id, eventFormData)
   };
 
   // ---------- Event handlers -------------------
@@ -41,17 +35,16 @@ const DropDownCheckboxes = ({ event }: IDropDownCheckboxes) => {
       // Skapar en temp array som innehåller alla instruktörer utom den som togs bort
       const updatedMarkedInstructors = markedInstructors.filter((i) => {
         i !== instructorId;
+        setMarkedInstructors(updatedMarkedInstructors)
       });
       // Skriver över de instruktörer som fanns tidigare
       setMarkedInstructors(updatedMarkedInstructors);
     } else {
       //lägger till instruktören i arrayen över instruktörer
-      setMarkedInstructors((prevMarkedInstructors) => [
-        ...prevMarkedInstructors,
-        instructorId,
-      ]);
+      const updatedMarkedInstructors =[...markedInstructors, instructorId]
+      setMarkedInstructors(updatedMarkedInstructors);
+      addNewInstructorsToEvent(updatedMarkedInstructors);
 
-      addNewInstructorsToEvent();
     }
   };
 
