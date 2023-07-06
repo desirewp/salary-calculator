@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Event, eventsVT22, instructors2023 } from "../../../assets/Classes";
 import "./Events.css";
-import DropDownCheckboxes from "../../DropDownCheckboxes/DropDownCheckboxes";
+
 
 const Events = () => {
   // Innehåller de Events som visas aka ordinarie event[]
   const [events, setEvents] = useState<Event[]>(eventsVT22);
   // Innehåller ny data från formuläret där ett event är uppdaterat
   const [formDataEvents, setFormDataEvents] = useState<Event[]>(eventsVT22);
-let newevent : Event;
-let updatedEvents : Event[];
+  let newevent: Event;
+  let updatedEvents: Event[];
 
   // Hämtar data från child komponenten och lägger till den i separat useState så att man kan välja om den sa sparas eller ej.
   const replaceFormData = (eventId: string, newEvent: Event) => {
@@ -21,6 +21,47 @@ let updatedEvents : Event[];
       setFormDataEvents(updatedEvents);
     }
   };
+
+
+    // Den variabeln som lagrar ändringarna när man kryssar i checkboxarna
+    const [eventFormData, setEventFormData] = useState<Event>(event);
+  
+    // Innehåller alla instruktörer som är valda på kursen innehåller ord. instruktörer vid start
+    const [markedInstructors, setMarkedInstructors] = useState<string[]>(
+      event.instructors
+    );
+  
+  
+    // Lägger till ändringen i det ordinarie eventet
+    const addNewInstructorsToEvent = (updatedMarkedInstructors: string[]) => {
+      setEventFormData((prevData) => ({
+        ...prevData,
+        instructors: updatedMarkedInstructors,
+      }));
+      console.log(updatedMarkedInstructors);
+      // Denna kod är en callback funktion som skickar upp allt till parent
+      // replaceEvent(event.id, eventFormData)
+    };
+  
+    // ---------- Event handlers -------------------
+    // Hanterar onChange events och lagrar dom i markedInstructors
+    const handleCheckboxChange = (instructorId: string, isChecked: boolean) => {
+      if (!isChecked) {
+        // Skapar en temp array som innehåller alla instruktörer utom den som togs bort
+        const updatedMarkedInstructors = markedInstructors.filter((i) => {
+          i !== instructorId;
+          setMarkedInstructors(updatedMarkedInstructors)
+        });
+        // Skriver över de instruktörer som fanns tidigare
+        setMarkedInstructors(updatedMarkedInstructors);
+      } else {
+        //lägger till instruktören i arrayen över instruktörer
+        const updatedMarkedInstructors =[...markedInstructors, instructorId]
+        setMarkedInstructors(updatedMarkedInstructors);
+        addNewInstructorsToEvent(updatedMarkedInstructors);
+  
+      }
+    };
 
   // ------------ UI -------------------
   const toggleEditUI = (eventId: string) => {
@@ -63,11 +104,10 @@ let updatedEvents : Event[];
   const handleSaveChangesClick = (e: React.FormEvent, eventId: string) => {
     e.preventDefault();
     alert("nu ska saker sparas!");
-    // Nu sakans funktion som trycker in det nya eventet i events från 
+    // Nu sakans funktion som trycker in det nya eventet i events från
     setEvents(updatedEvents);
     toggleEditUI(eventId);
   };
-
 
   const handleUndoChangesClick = (eventId: string) => {
     toggleEditUI(eventId);
@@ -156,10 +196,49 @@ let updatedEvents : Event[];
                     {!event.edit ? (
                       <p>{instructorData(event.instructors)}</p>
                     ) : (
-                      <DropDownCheckboxes
-                        event={event}
-                        replaceEvent={replaceFormData}
-                      />
+                      <form>
+                        <div className="checkbox-select">
+                          <ul>
+                            {instructors2023.map((instructor) => {
+                              return (
+                                <div
+                                  className="list-item-container"
+                                  key={instructor.id}
+                                >
+                                  <li
+                                    className={
+                                      eventFormData.instructors.includes(
+                                        instructor.id
+                                      )
+                                        ? "selected-instructor form-list"
+                                        : "form-list"
+                                    }
+                                  >
+                                    <input
+                                      type="checkbox"
+                                      id={instructor.id}
+                                      value={instructor.id}
+                                      checked={eventFormData.instructors.includes(
+                                        instructor.id
+                                      )}
+                                      onChange={(e) => {
+                                        const isChecked = e.target.checked;
+                                        handleCheckboxChange(
+                                          instructor.id,
+                                          isChecked
+                                        );
+                                      }}
+                                    />
+                                    <label htmlFor={instructor.id}>
+                                      {instructor.fullName}
+                                    </label>
+                                  </li>
+                                </div>
+                              );
+                            })}
+                          </ul>
+                        </div>
+                      </form>
                     )}
                   </td>
 
