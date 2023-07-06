@@ -8,12 +8,15 @@ const Events = () => {
   const [events, setEvents] = useState<Event[]>(eventsVT22);
   // Innehåller ny data från formuläret där ett event är uppdaterat
   const [formDataEvents, setFormDataEvents] = useState<Event[]>(eventsVT22);
+let newevent : Event;
+let updatedEvents : Event[];
 
   // Hämtar data från child komponenten och lägger till den i separat useState så att man kan välja om den sa sparas eller ej.
   const replaceFormData = (eventId: string, newEvent: Event) => {
+    newevent = newEvent;
     const eventIndex = formDataEvents.findIndex((e) => eventId === e.id);
     if (eventIndex !== -1) {
-      const updatedEvents = [...events];
+      updatedEvents = [...events];
       updatedEvents[eventIndex] = newEvent;
       setFormDataEvents(updatedEvents);
     }
@@ -61,7 +64,7 @@ const Events = () => {
     e.preventDefault();
     alert("nu ska saker sparas!");
     // Nu sakans funktion som trycker in det nya eventet i events från 
-    setEvents(formDataEvents);
+    setEvents(updatedEvents);
     toggleEditUI(eventId);
   };
 
