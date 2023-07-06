@@ -4,11 +4,9 @@ import "./Events.css";
 import DropDownCheckboxes from "../../DropDownCheckboxes/DropDownCheckboxes";
 
 const Events = () => {
-  // Denna useState lagrar orginalvärdet på Events så att man kan gå tillbaka "en edit"
+  // Innehåller de Events som visas aka ordinarie event[]
   const [events, setEvents] = useState<Event[]>(eventsVT22);
 
-  // Lagrar det event som har ändrats så att man kan välja att spara det eller att kaste ändringen :)
-  const [newEvent, setNewEvent] = useState<Event>();
 
   // const editInstructors = (instructors: string[], eventId: string) => {
   //   const updatedEvents = updateEventInstructorsById(instructors, eventId);
@@ -30,19 +28,8 @@ const Events = () => {
   //   });
   // };
 
-  // -------------- Hanterar uppdateringar av Instructors -------------------
-
-  const handleInstructorChange = (
-    selectedInstructors: string[],
-    eventId: string
-  ) => {
-    console.log(
-      `Dessa instrukötrer ska det ändras till ${selectedInstructors}`
-    );
-    // Här ska det sparas till en temp variabel som kan skrivas från om användaren väljer att spara
-  };
-
-  const saveChanges = () => {};
+ 
+ 
 
   // ------------ UI -------------------
   const toggleEditUI = (eventId: string) => {
@@ -82,13 +69,6 @@ const Events = () => {
     toggleEditUI(eventId);
   };
 
-  // När man klickar på knappen så stängs edit-mode och de nya ändingarna sparas
-  const handleSaveEditClick = (eventId: string) => {
-    // instructors ändras
-    // saveChanges();
-    // // sedan edit från toggleEditUI
-    // toggleEditUI(eventId);
-  };
 
   const handleSaveChangesClick = (e: React.FormEvent, eventId: string) => {
     e.preventDefault();

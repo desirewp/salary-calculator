@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Event, instructors2023 } from "../../assets/Classes";
 import "./DropDownCeckboxes.css";
 
@@ -8,39 +8,55 @@ interface IDropDownCheckboxes {
 
 interface IEventFormData {
   id: string;
-  // lessons: number;
-  // lessonLength: number;
   instructors: string[];
 }
 
-// Hela eventet behöver hämtas in som en usestate Variabel
 const DropDownCheckboxes = ({ event }: IDropDownCheckboxes) => {
+  // Den variabeln som lagrar ändringarna när man kryssar i checkboxarna
   const [eventFormData, setEventFormData] = useState<IEventFormData>(event);
-  const [orginalEventFormData, setOrginalEventFormData] =
-    useState<IEventFormData>(event);
+  
+  // Innehåller alla instruktörer som är valda på kursen innehåller ord. instruktörer vid start
+  const [markedInstructors, setMarkedInstructors] = useState<string[]>(
+    event.instructors
+  );
+
+
+  useEffect(() => {
+    addNewInstructorsToEvent();
+  }, [markedInstructors]);
+
+  // Lägger till ändringen i det ordinarie eventet
+  const addNewInstructorsToEvent = () => {
+    setEventFormData((prevData) => ({
+      ...prevData,
+      instructors: markedInstructors,
+    }));
+    console.log(markedInstructors);
+  };
 
   // ---------- Event handlers -------------------
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Skriver över "sparvariabeln" med den nya datan
-    setOrginalEventFormData(eventFormData);
-  };
+  // Hanterar onChange events och lagrar dom i markedInstructors
+  const handleCheckboxChange = (instructorId: string, isChecked: boolean) => {
+    if (!isChecked) {
+      // Skapar en temp array som innehåller alla instruktörer utom den som togs bort
+      const updatedMarkedInstructors = markedInstructors.filter((i) => {
+        i !== instructorId;
+      });
+      // Skriver över de instruktörer som fanns tidigare
+      setMarkedInstructors(updatedMarkedInstructors);
+    } else {
+      //lägger till instruktören i arrayen över instruktörer
+      setMarkedInstructors((prevMarkedInstructors) => [
+        ...prevMarkedInstructors,
+        instructorId,
+      ]);
 
-  const handleUndoChanges = () => {
-    // Återställer eventet till ordinarie data (ångrar)
-    setEventFormData(orginalEventFormData);
-  };
-
-  // Hanterar onChange events och lagrar dom i "nya data variabeln" eventFormData
-  const handleFormFieldChange = (field: keyof IEventFormData, value: any) => {
-    setEventFormData((prevEventFormData) => ({
-      ...prevEventFormData,
-      [field]: value,
-    }));
+      addNewInstructorsToEvent();
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <div className="checkbox-select">
         <ul>
           {instructors2023.map((instructor) => {
@@ -58,18 +74,9 @@ const DropDownCheckboxes = ({ event }: IDropDownCheckboxes) => {
                     id={instructor.id}
                     value={instructor.id}
                     checked={eventFormData.instructors.includes(instructor.id)}
-                    onChange={(event) => {
-                      const isChecked = event.target.checked;
-                      const instructor = event.target.value;
-
-                      handleFormFieldChange(
-                        "instructors",
-                        isChecked
-                          ? [...eventFormData.instructors, instructor]
-                          : eventFormData.instructors.filter((i) => {
-                              i !== instructor;
-                            })
-                      );
+                    onChange={(e) => {
+                      const isChecked = e.target.checked;
+                      handleCheckboxChange(instructor.id, isChecked);
                     }}
                   />
                   <label htmlFor={instructor.id}>{instructor.fullName}</label>
@@ -79,12 +86,6 @@ const DropDownCheckboxes = ({ event }: IDropDownCheckboxes) => {
           })}
         </ul>
       </div>
-      {/* <button type="submit">
-        Spara! <span className="material-symbols-outlined">done</span>
-      </button>
-      <button type="button" onClick={handleUndoChanges}>
-        Ångra <span className="material-symbols-outlined">close</span>
-      </button> */}
     </form>
   );
 };
