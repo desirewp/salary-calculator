@@ -1,45 +1,58 @@
 .box {
-    border-radius: 5px;
-    background: #343434;
-    padding: 1.5rem;
-  }
-  
-  .events-table {
-    margin: 5px;
-    border-collapse: collapse;
-  }
-  
-  .events-table th,
-  .events-table td {
-    padding: 4px;
-  }
-  
-  th {
-    text-align: left;
-  }
-  
-  .events-table tr:nth-child(odd) {
-    background: #1f1f1f;
-  }
-  
-  .events-table tr:hover {
-    background: #4e4e4e;
-  }
-  
-  .flex-row-between{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  border-radius: 5px;
+  background: #343434;
+  padding: 1.5rem;
+}
 
-.material-symbols-outlined{
-  color: #E6E6E6;
+.events-table {
+  margin: 5px;
+  border-collapse: collapse;
+}
+
+.events-table th,
+.events-table td {
+  padding: 4px;
+}
+
+th {
+  text-align: left;
+}
+
+.events-table tr:nth-child(odd) {
+  background: #1f1f1f;
+}
+
+.events-table tr:hover {
+  background: #4e4e4e;
+}
+
+.flex-row-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.material-symbols-outlined {
+  color: #e6e6e6;
   cursor: pointer;
 }
-.material-symbols-outlined:hover{
-color:  #1f1f1f
+.material-symbols-outlined:hover {
+  color: #1f1f1f;
 }
 
-.display-none{
+.display-none {
   display: none;
+}
+
+.edit-icon {
+  display: none;
+}
+
+tr:hover .edit-icon {
+  display: block;
+}
+
+.action-column{
+ width: 35px;
+
 }

@@ -8,7 +8,8 @@ x. Hindra att man på Event-sidan kan edit flera kurser samtidigt?
 xx. göra checkbox-listan i edit mode på event-sidan snyggare.
 xxx. göra så att kolumnerna inte får olika storlek när man växlar mellan edit och read-mode på event-sidan.
 xxxx.hindra att content scrollas utan att det istället är i tabell-boxen som scrollen ligger när det blir många kurser
-
+xxxxx. Funktion så man kan ångra och gå tillbaka till det gamla värdet när man håller på och edit en kurs/event
+xxxxxx. 
 
 ~~~~~~~ 🥦 ~Klart~ 🥦 ~~~~~~~~~
 1.1 När man väljer att edit på event-sidan ska de instruktörer som redan är reggade på eventet vara markerade i checkbox-listan

@@ -22,7 +22,8 @@ export class Event {
     public lessons: number,
     public lessonLength: number,
     public price: number,
-    public instructors: string[]
+    public instructors: string[],
+    public edit: boolean
   ) {
     this.id = id;
     this.eventName = eventName;
@@ -31,6 +32,7 @@ export class Event {
     this.lessonLength = lessonLength;
     this.price = price;
     this.instructors = instructors;
+    this.edit = edit;
   }
 }
 
@@ -59,10 +61,10 @@ export const eventsVT22: Event[] = [
   new Event("afaffafgfm", "Bachata nybörjare", "2022-01-12", 10, 2, 1600, [
     "abcd55izicbi",
     "abcdvvvizicbi",
-  ]),
+  ], false),
   new Event("baxbjabxj", "Acro-ho-ho", "2022-03-16", 1, 2.5, 300, [
     "abcadaizicbi",
-  ]),
+  ], false),
   new Event(
     "shjcjdanvfnov",
     "West coast swing",
@@ -70,7 +72,7 @@ export const eventsVT22: Event[] = [
     8,
     1.5,
     1000,
-    []
+    [], false
   ),
 ];
 

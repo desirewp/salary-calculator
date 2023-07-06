@@ -1,8 +1,8 @@
 .checkbox-select{
- 
     padding: 3px;
-    height: 180px;
+    height: 190px;
     overflow-y: auto;
+    overflow-x: hidden;
     /* max-width: 45px; */
 }
 
@@ -10,11 +10,12 @@ input[type=checkbox]{
     width: 15px;
 }
 
-ul,li{
+ul,.form-list{
+    margin: 0;
     padding: 0;
 }
 
-li{
+.form-list{
     display:flex;
     justify-content: left;
     align-items: center;
@@ -22,9 +23,12 @@ li{
 }
 
 .list-item-container{
-    height: 2.5rem;
+    height: 2rem;
 }
 
+.form-list:hover{
+    background: yellow;
+}
 .selected-instructor{
     background: yellow;
 }

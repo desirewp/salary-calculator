@@ -1,16 +1,61 @@
-import { useState } from "react";
-import {
-  Event,
-  eventsVT22,
-  instructors2023,
-} from "../../../assets/Classes";
+import { useRef, useState } from "react";
+import { Event, eventsVT22, instructors2023 } from "../../../assets/Classes";
 import "./Events.css";
 import DropDownCheckboxes from "../../DropDownCheckboxes/DropDownCheckboxes";
 
 const Events = () => {
+  // Denna useState lagrar orginalvärdet på Events så att man kan gå tillbaka "en edit"
   const [events, setEvents] = useState<Event[]>(eventsVT22);
-  // Bestämmer utseendet på tabellen
-  const [displayEditMode, setDisplayEditMode] = useState<string[]>([]);
+
+  // Lagrar det event som har ändrats så att man kan välja att spara det eller att kaste ändringen :)
+  const [newEvent, setNewEvent] = useState<Event>();
+
+  // const editInstructors = (instructors: string[], eventId: string) => {
+  //   const updatedEvents = updateEventInstructorsById(instructors, eventId);
+  //   console.log(`här triggas edit Instructors och ${updatedEvents} sparas till newEvents`)
+  //   setNewEvents(updatedEvents);
+  // };
+
+  // Tar in event id för event som ska uppdateras och instruktörerna som det ska uppdateras till
+  // Går sedan in på eventet med rätt id och byter ut dess instruktörer till de/den nya
+  // const updateEventInstructorsById = (
+  //   newInstructors: string[],
+  //   eventId: string
+  // ) => {
+  //   return events.map((event) => {
+  //     if (event.id === eventId) {
+  //       return { ...event, instructors: newInstructors };
+  //     }
+  //     return event;
+  //   });
+  // };
+
+  // -------------- Hanterar uppdateringar av Instructors -------------------
+
+  const handleInstructorChange = (
+    selectedInstructors: string[],
+    eventId: string
+  ) => {
+    console.log(
+      `Dessa instrukötrer ska det ändras till ${selectedInstructors}`
+    );
+    // Här ska det sparas till en temp variabel som kan skrivas från om användaren väljer att spara
+  };
+
+  const saveChanges = () => {};
+
+  // ------------ UI -------------------
+  const toggleEditUI = (eventId: string) => {
+    const updatedEditOnEvent = events.map((event) => {
+      if (event.id === eventId) {
+        return { ...event, edit: !event.edit };
+      }
+      return event;
+    });
+    // Ändrar edit mode på objektet så att UI togglas
+    setEvents(updatedEditOnEvent);
+    return updatedEditOnEvent;
+  };
 
   // Hämtar om kursen har en giltig instruktör som har bet medlemsavgift
   const getInstructorNameById = (instructorId: string) => {
@@ -21,24 +66,39 @@ const Events = () => {
     return instructor ? instructor.fullName : "Instructor not member";
   };
 
+  // Sköter visningen av instruktörers namn
   const instructorData = (instructors: string[]) => {
     if (instructors.length === 0) {
       return "No instructor found";
     }
     const instructorArray = instructors.map(getInstructorNameById);
-    const instructorText = instructorArray.join();
+    const instructorText = instructorArray.join(", ");
     return instructorText;
   };
 
   // ------------Event handlers----------------
-
-  // 1. När man klickar på knappen ska dropdown menyn visas istället för nuvarande instruktörer
+  //När man klickar på knappen visas edit-mode
   const handleEditCourseClick = (eventId: string) => {
-    if (displayEditMode.includes(eventId)) {
-      setDisplayEditMode(displayEditMode.filter((event) => event !== eventId));
-    } else {
-      setDisplayEditMode([...displayEditMode, eventId]);
-    }
+    toggleEditUI(eventId);
+  };
+
+  // När man klickar på knappen så stängs edit-mode och de nya ändingarna sparas
+  const handleSaveEditClick = (eventId: string) => {
+    // instructors ändras
+    // saveChanges();
+    // // sedan edit från toggleEditUI
+    // toggleEditUI(eventId);
+  };
+
+  const handleSaveChangesClick = (e: React.FormEvent, eventId: string) => {
+    e.preventDefault();
+    alert("nu ska saker sparas!");
+    toggleEditUI(eventId);
+  };
+
+  const handleUndoChangesClick = (eventId: string) => {
+    alert("nu ska saker INTE sparas!");
+    toggleEditUI(eventId);
   };
 
   return (
@@ -74,14 +134,6 @@ const Events = () => {
               </th>
               <th>
                 <p>
-                  Lesson length
-                  <span className="material-symbols-outlined">
-                    arrow_drop_down
-                  </span>
-                </p>
-              </th>
-              <th>
-                <p>
                   Course length
                   <span className="material-symbols-outlined">
                     arrow_drop_down
@@ -104,6 +156,7 @@ const Events = () => {
                   </span>
                 </p>
               </th>
+              <th className="action-column"></th>
             </tr>
           </thead>
           <tbody>
@@ -117,10 +170,9 @@ const Events = () => {
                     <p>{event.startDate}</p>
                   </td>
                   <td>
-                    <p>{event.lessons}</p>
-                  </td>
-                  <td>
-                    <p>{event.lessonLength} h</p>
+                    <p>
+                      {event.lessons} x {event.lessonLength}h
+                    </p>
                   </td>
                   <td>
                     <p>{event.lessons * event.lessonLength} h</p>
@@ -128,34 +180,50 @@ const Events = () => {
                   <td>
                     <p>{event.price} SEK</p>
                   </td>
-                  <td className="flex-row-between">
-                    {displayEditMode.includes(event.id) ? (
-                      <>
-                        <p>{instructorData(event.instructors)}</p>
-                        <span
-                          className="material-symbols-outlined"
-                          onClick={() => {
-                            handleEditCourseClick(event.id);
-                          }}
-                        >
-                          edit_document
-                        </span>
-                      </>
+                  <td>
+                    {!event.edit ? (
+                      <p>{instructorData(event.instructors)}</p>
                     ) : (
-                      <>
-                     {/* Behöver skickas ned som en useState */}
+                      <DropDownCheckboxes event={event} />
+                    )}
+                  </td>
 
-                        <DropDownCheckboxes selectedInstructors={event.instructors} 
-                        />
-                        <span
-                          className="material-symbols-outlined"
-                          onClick={() => {
-                            handleEditCourseClick(event.id);
-                          }}
-                        >
-                          done
-                        </span>
-                      </>
+                  <td className="action-column">
+                    {!event.edit ? (
+                      <span
+                        className="material-symbols-outlined edit-icon"
+                        onClick={() => {
+                          handleEditCourseClick(event.id);
+                        }}
+                      >
+                        edit_document
+                      </span>
+                    ) : (
+                      <div>
+                        <button type="submit">
+                          <span
+                            className="material-symbols-outlined"
+                            onClick={(e) => {
+                              handleSaveChangesClick(e, event.id);
+                            }}
+                            //   onClick={() => {
+                            //     handleSaveEditClick(event.id);
+                            //   }}
+                          >
+                            done
+                          </span>
+                        </button>
+                        <button type="button">
+                          <span
+                            className="material-symbols-outlined"
+                            onClick={() => {
+                              handleUndoChangesClick(event.id);
+                            }}
+                          >
+                            close
+                          </span>
+                        </button>
+                      </div>
                     )}
                   </td>
                 </tr>
