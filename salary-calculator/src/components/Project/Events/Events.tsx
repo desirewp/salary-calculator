@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Event, eventsVT22, instructors2023 } from "../../../assets/Classes";
 import "./Events.css";
 import DropDownCheckboxes from "../../DropDownCheckboxes/DropDownCheckboxes";

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./Helpbar.css";
 import SettingsHelpContent from "../Settings/SettingsHelpContent";
 
