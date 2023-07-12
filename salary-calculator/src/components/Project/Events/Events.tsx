@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Event, eventsVT22, instructors2023 } from "../../../assets/Classes";
 import "./Events.css";
-import DropDownCheckboxes from "../../DropDownCheckboxes/DropDownCheckboxes";
+import CourseForm from "../../DropDownCheckboxes/CourseForm";
 
 const Events = () => {
   // Innehåller de Events som visas aka ordinarie event[]
@@ -28,7 +28,7 @@ let updatedEvents : Event[];
       if (event.id === eventId) {
         return { ...event, edit: !event.edit };
       }
-      return event;
+      return {...event, edit: false};
     });
     // Ändrar edit mode på objektet så att UI togglas
     setEvents(updatedEditOnEvent);
@@ -61,7 +61,6 @@ let updatedEvents : Event[];
   };
 
   const handleSaveChangesClick = (e: React.FormEvent, eventId: string) => {
-    e.preventDefault();
     alert("nu ska saker sparas!");
     // Nu sakans funktion som trycker in det nya eventet i events från 
     setEvents(updatedEvents);
@@ -106,7 +105,7 @@ let updatedEvents : Event[];
               </th>
               <th>
                 <p>
-                  Course length
+                  Length
                   <span className="material-symbols-outlined">
                     arrow_drop_down
                   </span>
@@ -156,7 +155,7 @@ let updatedEvents : Event[];
                     {!event.edit ? (
                       <p>{instructorData(event.instructors)}</p>
                     ) : (
-                      <DropDownCheckboxes
+                      <CourseForm
                         event={event}
                         replaceEvent={replaceFormData}
                       />

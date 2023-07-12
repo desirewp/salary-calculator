@@ -13,12 +13,20 @@ const MemberScreen = () => {
     setShowHelpbar("block");
   };
 
+const handleAddNew = () => { 
+  alert('Bop. Funktion ej implementerad ännu')
+ }
+
   return (
     <div className="content-container">
       <Sidebar openHelp={openHelp} />
       <section className="content">
         <div className="box">
-          <h1>Instructors 2023</h1>
+          <div className="heading-container">
+
+          <h1>Instructors 2023</h1>{" "}
+          <span className="material-symbols-outlined" onClick={handleAddNew}>person_add</span>
+          </div>
           <table className="instructors-table">
             <thead>
               <tr>
@@ -45,9 +53,7 @@ const MemberScreen = () => {
                 return (
                   <tr>
                     <td>
-                      <p>
-                        {instructor.fName} {instructor.lName}
-                      </p>
+                      <p>{instructor.fullName}</p>
                     </td>
                     <td>
                       <p>{instructor.email}</p>

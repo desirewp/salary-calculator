@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Event, instructors2023 } from "../../assets/Classes";
-import "./DropDownCeckboxes.css";
+import "./CourseForm.css";
 
 interface IDropDownCheckboxes {
   event: Event;
   replaceEvent(eventId: string, newEvent : Event): void
 }
 
-const DropDownCheckboxes = ({ event, replaceEvent }: IDropDownCheckboxes) => {
+const CourseForm = ({ event, replaceEvent }: IDropDownCheckboxes) => {
   // Den variabeln som lagrar ändringarna när man kryssar i checkboxarna
   const [eventFormData, setEventFormData] = useState<Event>(event);
   
@@ -83,4 +83,4 @@ const DropDownCheckboxes = ({ event, replaceEvent }: IDropDownCheckboxes) => {
   );
 };
 
-export default DropDownCheckboxes;
+export default CourseForm;
