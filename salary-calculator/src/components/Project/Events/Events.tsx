@@ -1,22 +1,16 @@
 import { useState } from "react";
 import { Event, eventsVT22, instructors2023 } from "../../../assets/Classes";
 import "./Events.css";
-import CourseForm from "../../DropDownCheckboxes/EventForm";
+import EventForm from "../../DropDownCheckboxes/EventForm";
 
 const Events = () => {
   // Innehåller de Events som visas aka ordinarie event[]
   const [events, setEvents] = useState<Event[]>(eventsVT22);
-  // Innehåller ny data från formuläret där ett event är uppdaterat
-  const [formDataEvents, setFormDataEvents] = useState<Event[]>(eventsVT22);
+ 
 
   const handleSaveEvent = () => { 
   
    }
-
-
-
-
-
 
 
   // ------------ UI -DESSA FUNGERAR-------------------
@@ -151,7 +145,7 @@ const Events = () => {
                     {!event.edit ? (
                       <p>{instructorData(event.instructors)}</p>
                     ) : (
-                      <CourseForm
+                      <EventForm
                         event={event}
                         onSave={handleSaveEvent}
                       />
