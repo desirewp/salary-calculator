@@ -1,28 +1,25 @@
 import { useState } from "react";
 import { Event, eventsVT22, instructors2023 } from "../../../assets/Classes";
 import "./Events.css";
-import CourseForm from "../../DropDownCheckboxes/CourseForm";
+import CourseForm from "../../DropDownCheckboxes/EventForm";
 
 const Events = () => {
   // Innehåller de Events som visas aka ordinarie event[]
   const [events, setEvents] = useState<Event[]>(eventsVT22);
   // Innehåller ny data från formuläret där ett event är uppdaterat
   const [formDataEvents, setFormDataEvents] = useState<Event[]>(eventsVT22);
-let newevent : Event;
-let updatedEvents : Event[];
 
-  // Hämtar data från child komponenten och lägger till den i separat useState så att man kan välja om den sa sparas eller ej.
-  const replaceFormData = (eventId: string, newEvent: Event) => {
-    newevent = newEvent;
-    const eventIndex = formDataEvents.findIndex((e) => eventId === e.id);
-    if (eventIndex !== -1) {
-      updatedEvents = [...events];
-      updatedEvents[eventIndex] = newEvent;
-      setFormDataEvents(updatedEvents);
-    }
-  };
+  const handleSaveEvent = () => { 
+  
+   }
 
-  // ------------ UI -------------------
+
+
+
+
+
+
+  // ------------ UI -DESSA FUNGERAR-------------------
   const toggleEditUI = (eventId: string) => {
     const updatedEditOnEvent = events.map((event) => {
       if (event.id === eventId) {
@@ -34,8 +31,9 @@ let updatedEvents : Event[];
     setEvents(updatedEditOnEvent);
     return updatedEditOnEvent;
   };
-
-  // Hämtar om kursen har en giltig instruktör som har bet medlemsavgift
+    
+  // ---------------- Visning av data i kolumnen instructors -DESSA FUNGERAR-------
+   // Hämtar om kursen har en giltig instruktör som har bet medlemsavgift
   const getInstructorNameById = (instructorId: string) => {
     // Hittar den instruktör som matchar idt kopplat på kursen
     const instructor = instructors2023.find(
@@ -54,7 +52,7 @@ let updatedEvents : Event[];
     return instructorText;
   };
 
-  // ------------Event handlers----------------
+  // ------------Event handlers  -DESSA FUNGERAR----------------
   //När man klickar på knappen visas edit-mode
   const handleEditCourseClick = (eventId: string) => {
     toggleEditUI(eventId);
@@ -63,10 +61,8 @@ let updatedEvents : Event[];
   const handleSaveChangesClick = (e: React.FormEvent, eventId: string) => {
     alert("nu ska saker sparas!");
     // Nu sakans funktion som trycker in det nya eventet i events från 
-    setEvents(updatedEvents);
     toggleEditUI(eventId);
   };
-
 
   const handleUndoChangesClick = (eventId: string) => {
     toggleEditUI(eventId);
@@ -157,7 +153,7 @@ let updatedEvents : Event[];
                     ) : (
                       <CourseForm
                         event={event}
-                        replaceEvent={replaceFormData}
+                        onSave={handleSaveEvent}
                       />
                     )}
                   </td>
