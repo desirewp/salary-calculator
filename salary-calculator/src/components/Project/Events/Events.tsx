@@ -1,17 +1,21 @@
 import { useState } from "react";
 import { Event, eventsVT22, instructors2023 } from "../../../assets/Classes";
 import "./Events.css";
-import EventForm from "../../DropDownCheckboxes/EventForm";
+import EventForm from "../../EventForm/EventForm";
 
 const Events = () => {
   // Innehåller de Events som visas aka ordinarie event[]
   const [events, setEvents] = useState<Event[]>(eventsVT22);
- 
 
-  const handleSaveEvent = () => { 
-  
-   }
-
+  // Lägger till det nya uppdaterade eventet med de andra
+  const handleSaveEvent = (updatedEvent: Event) => {
+    const updatedEvents = events.map((event) => {
+      if (event.id === updatedEvent.id) {
+        return updatedEvent;
+      } else return event;
+    });
+    setEvents(updatedEvents);
+  };
 
   // ------------ UI -DESSA FUNGERAR-------------------
   const toggleEditUI = (eventId: string) => {
@@ -19,15 +23,15 @@ const Events = () => {
       if (event.id === eventId) {
         return { ...event, edit: !event.edit };
       }
-      return {...event, edit: false};
+      return { ...event, edit: false };
     });
     // Ändrar edit mode på objektet så att UI togglas
     setEvents(updatedEditOnEvent);
     return updatedEditOnEvent;
   };
-    
+
   // ---------------- Visning av data i kolumnen instructors -DESSA FUNGERAR-------
-   // Hämtar om kursen har en giltig instruktör som har bet medlemsavgift
+  // Hämtar om kursen har en giltig instruktör som har bet medlemsavgift
   const getInstructorNameById = (instructorId: string) => {
     // Hittar den instruktör som matchar idt kopplat på kursen
     const instructor = instructors2023.find(
@@ -54,7 +58,7 @@ const Events = () => {
 
   const handleSaveChangesClick = (e: React.FormEvent, eventId: string) => {
     alert("nu ska saker sparas!");
-    // Nu sakans funktion som trycker in det nya eventet i events från 
+    // Nu sakans funktion som trycker in det nya eventet i events från
     toggleEditUI(eventId);
   };
 
@@ -145,10 +149,7 @@ const Events = () => {
                     {!event.edit ? (
                       <p>{instructorData(event.instructors)}</p>
                     ) : (
-                      <EventForm
-                        event={event}
-                        onSave={handleSaveEvent}
-                      />
+                      <EventForm event={event} onSave={handleSaveEvent} />
                     )}
                   </td>
 
@@ -164,16 +165,6 @@ const Events = () => {
                       </span>
                     ) : (
                       <div>
-                        <button type="button">
-                          <span
-                            className="material-symbols-outlined"
-                            onClick={(e) => {
-                              handleSaveChangesClick(e, event.id);
-                            }}
-                          >
-                            done
-                          </span>
-                        </button>
                         <button type="button">
                           <span
                             className="material-symbols-outlined"
