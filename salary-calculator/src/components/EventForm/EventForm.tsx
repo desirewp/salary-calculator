@@ -12,8 +12,7 @@ const EventForm = ({ event, onSave }: IDropDownCheckboxes) => {
   const [instructors, setInstructors] = useState<string[]>(event.instructors);
 
   // ---------- Event handlers -------------------
-  const handleSaveChanges = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSaveChanges = () => {
     const updatedEvent = new Event(
       event.id,
       event.eventName,
@@ -22,6 +21,20 @@ const EventForm = ({ event, onSave }: IDropDownCheckboxes) => {
       event.lessonLength,
       event.price,
       instructors,
+      false //Stänger edit mode
+    );
+    onSave(updatedEvent);
+  };
+
+  const handleClose = () => {
+    const updatedEvent = new Event(
+      event.id,
+      event.eventName,
+      event.startDate,
+      event.lessons,
+      event.lessonLength,
+      event.price,
+      event.instructors,
       false //Stänger edit mode
     );
     onSave(updatedEvent);
@@ -38,37 +51,75 @@ const EventForm = ({ event, onSave }: IDropDownCheckboxes) => {
     setInstructors(updatedInstructors);
   };
   return (
-    <form onSubmit={handleSaveChanges}>
-      <div className="checkbox-select">
-        <ul>
-          {instructors2023.map((instructor) => {
-            return (
-              <div className="list-item-container" key={instructor.id}>
-                <li
-                  className={
-                    instructors.includes(instructor.id)
-                      ? "selected-instructor form-list"
-                      : "form-list"
-                  }
-                >
-                  <input
-                    type="checkbox"
-                    id={instructor.id}
-                    value={instructor.id}
-                    checked={instructors.includes(instructor.id)}
-                    onChange={() => handleCheckboxChange(instructor.id)}
-                  />
-                  <label htmlFor={instructor.id}>{instructor.fullName}</label>
-                </li>
-              </div>
-            );
-          })}
-        </ul>
-      </div>
-      <button type="submit">
-        <span className="material-symbols-outlined">done</span>
-      </button>
-    </form>
+    // <form onSubmit={handleSaveChanges}>
+    <tr key={event.id}>
+      <td>
+        <p>{event.eventName}</p>
+      </td>
+      <td>
+        <p>{event.startDate}</p>
+      </td>
+      <td>
+        <p>
+          {event.lessons} x {event.lessonLength}h
+        </p>
+      </td>
+      <td>
+        <p>{event.lessons * event.lessonLength} h</p>
+      </td>
+      <td>
+        <p>{event.price} SEK</p>
+      </td>
+
+      <td>
+        {/* Instruktör input */}
+        <div className="checkbox-select">
+          <ul>
+            {instructors2023.map((instructor) => {
+              return (
+                <div className="list-item-container" key={instructor.id}>
+                  <li
+                    className={
+                      instructors.includes(instructor.id)
+                        ? "selected-instructor form-list"
+                        : "form-list"
+                    }
+                  >
+                    <input
+                      type="checkbox"
+                      id={instructor.id}
+                      value={instructor.id}
+                      checked={instructors.includes(instructor.id)}
+                      onChange={() => handleCheckboxChange(instructor.id)}
+                    />
+                    <label htmlFor={instructor.id}>{instructor.fullName}</label>
+                  </li>
+                </div>
+              );
+            })}
+          </ul>
+        </div>
+      </td>
+
+      <td className="action-column">
+        <button type="button" onClick={handleSaveChanges}>
+          <span className="material-symbols-outlined">done</span>
+        </button>
+        <div>
+          <button type="button">
+            <span
+              className="material-symbols-outlined"
+              onClick={() => {
+                handleClose();
+              }}
+            >
+              close
+            </span>
+          </button>
+        </div>
+      </td>
+    </tr>
+    // </form>
   );
 };
 

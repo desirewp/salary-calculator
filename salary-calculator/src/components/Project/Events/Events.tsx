@@ -21,13 +21,12 @@ const Events = () => {
   const toggleEditUI = (eventId: string) => {
     const updatedEditOnEvent = events.map((event) => {
       if (event.id === eventId) {
-        return { ...event, edit: !event.edit };
+        return { ...event, edit: true };
       }
       return { ...event, edit: false };
     });
     // Ändrar edit mode på objektet så att UI togglas
     setEvents(updatedEditOnEvent);
-    return updatedEditOnEvent;
   };
 
   // ---------------- Visning av data i kolumnen instructors -DESSA FUNGERAR-------
@@ -126,7 +125,7 @@ const Events = () => {
           </thead>
           <tbody>
             {events.map((event) => {
-              return (
+              return !event.edit ? (
                 <tr key={event.id}>
                   <td>
                     <p>{event.eventName}</p>
@@ -146,39 +145,24 @@ const Events = () => {
                     <p>{event.price} SEK</p>
                   </td>
                   <td>
-                    {!event.edit ? (
-                      <p>{instructorData(event.instructors)}</p>
-                    ) : (
-                      <EventForm event={event} onSave={handleSaveEvent} />
-                    )}
+                    <p>{instructorData(event.instructors)}</p>
                   </td>
-
                   <td className="action-column">
-                    {!event.edit ? (
-                      <span
-                        className="material-symbols-outlined edit-icon"
-                        onClick={() => {
-                          handleEditCourseClick(event.id);
-                        }}
-                      >
-                        edit_document
-                      </span>
-                    ) : (
-                      <div>
-                        <button type="button">
-                          <span
-                            className="material-symbols-outlined"
-                            onClick={() => {
-                              handleUndoChangesClick(event.id);
-                            }}
-                          >
-                            close
-                          </span>
-                        </button>
-                      </div>
-                    )}
+                    <span
+                      className="material-symbols-outlined edit-icon"
+                      onClick={() => {
+                        handleEditCourseClick(event.id);
+                      }}
+                    >
+                      edit_document
+                    </span>
                   </td>
                 </tr>
+              ) : (
+                <>
+                  <p>HI</p>
+                  <EventForm event={event} onSave={handleSaveEvent} />
+                </>
               );
             })}
           </tbody>
