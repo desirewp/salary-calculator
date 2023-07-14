@@ -69,6 +69,7 @@ const EventForm = ({ event, onSave }: IDropDownCheckboxes) => {
       </td>
       <td>
         <p>{event.price} SEK</p>
+        <input type="number" name="price" id="price-input"  value={event.price}/>
       </td>
 
       <td>

@@ -160,7 +160,6 @@ const Events = () => {
                 </tr>
               ) : (
                 <>
-                  <p>HI</p>
                   <EventForm event={event} onSave={handleSaveEvent} />
                 </>
               );
