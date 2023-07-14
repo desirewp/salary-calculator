@@ -14,11 +14,6 @@ const Events = () => {
    }
 
 
-
-
-
-
-
   // ------------ UI -DESSA FUNGERAR-------------------
   const toggleEditUI = (eventId: string) => {
     const updatedEditOnEvent = events.map((event) => {
