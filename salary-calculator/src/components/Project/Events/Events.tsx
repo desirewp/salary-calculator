@@ -72,6 +72,12 @@ const Events = () => {
         <table className="events-table">
           <thead>
             <tr>
+              <th>
+                <p>Salary</p>
+              </th>
+              <th>
+                <p>Rent</p>
+              </th>
               <th className="event-name-column">
                 <p>
                   Event
@@ -127,6 +133,23 @@ const Events = () => {
             {events.map((event) => {
               return !event.edit ? (
                 <tr key={event.id}>
+                  <td>
+                    {event.calculateSalary ? (
+                      <span className="material-symbols-outlined">
+                        monetization_on
+                      </span>
+                    ) : (
+                      <></>
+                    )}
+                  </td>
+                  <td>
+                    {event.addRent ? (
+                      <span className="material-symbols-outlined">store</span>
+                    ) : (
+                      <></>
+                    )}
+                  </td>
+
                   <td className="event-name-column">
                     <p>{event.eventName}</p>
                   </td>
@@ -166,6 +189,10 @@ const Events = () => {
             })}
           </tbody>
         </table>
+      </div>
+      <div className="box">
+        <p>Fortsätt jobba på att få till funktionalitet på salary & rent checkbox</p>
+        <p>Sedan fokusera på att kunna lägge till ett nytt event (använd denna låda då för tillfället)</p>
       </div>
     </section>
   );

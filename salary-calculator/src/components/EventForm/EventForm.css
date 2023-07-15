@@ -3,7 +3,6 @@
     height: 190px;
     overflow-y: auto;
     overflow-x: hidden;
-    /* max-width: 45px; */
 }
 
 input[type=checkbox]{
@@ -11,7 +10,8 @@ input[type=checkbox]{
 }
 
 .event-input{
-    width: 50%;
+    width: 80%;
+    height: 2rem;
 }
 
 ul,.form-list{
@@ -26,6 +26,16 @@ ul,.form-list{
     gap: 3px;
 }
 
+.checkbox-btn-row{
+    display: flex;
+}
+
+.event-checkbox{
+    height: auto;
+    width: auto;
+    margin-right: 3px;
+}
+
 .list-item-container{
     height: 2rem;
 }
@@ -35,6 +45,10 @@ ul,.form-list{
 }
 .selected-instructor{
     background: yellow;
+}
+
+.old-value-text{
+    color: #858585;
 }
 
 

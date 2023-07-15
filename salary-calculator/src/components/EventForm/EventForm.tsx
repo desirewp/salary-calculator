@@ -9,16 +9,24 @@ interface IDropDownCheckboxes {
 
 const EventForm = ({ event, onSave }: IDropDownCheckboxes) => {
   // Fyll på med fält när formuläret byggs ut
+
+  const [calculateSalary, setCalculateSalary] = useState<boolean>(event.calculateSalary);
+  const [addRent, setAddRent] = useState<boolean>(event.addRent);
+  const [lessons, setLessons] = useState<number>(event.lessons);
+  const [lessonLength, setLessonLength] = useState<number>(event.lessonLength);
+  const [price, setprice] = useState<number>(event.price);
   const [instructors, setInstructors] = useState<string[]>(event.instructors);
 
   // ---------- Event handlers -------------------
   const handleSaveChanges = () => {
     const updatedEvent = new Event(
       event.id,
+      event.addRent,
+      event.calculateSalary,
       event.eventName,
       event.startDate,
-      event.lessons,
-      event.lessonLength,
+      lessons,
+      lessonLength,
       event.price,
       instructors,
       false //Stänger edit mode
@@ -29,6 +37,8 @@ const EventForm = ({ event, onSave }: IDropDownCheckboxes) => {
   const handleClose = () => {
     const updatedEvent = new Event(
       event.id,
+      event.addRent,
+      event.calculateSalary,
       event.eventName,
       event.startDate,
       event.lessons,
@@ -40,6 +50,22 @@ const EventForm = ({ event, onSave }: IDropDownCheckboxes) => {
     onSave(updatedEvent);
   };
 
+  const handleLessonsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let lessonsNumber = Number(event.target.value);
+    setLessons(lessonsNumber);
+  };
+
+  const handleLessonLengthChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    let lessonLnghtNumber = Number(event.target.value);
+    setLessonLength(lessonLnghtNumber);
+  };
+
+  const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let priceNumber = Number(event.target.value);
+    setprice(priceNumber);
+  };
   // Hanterar onChange events och lagrar dom i markedInstructors
   const handleCheckboxChange = (instructor: string) => {
     // Om instruktören finns redan så tas den bort från arrayen annars så läggs hen till
@@ -51,7 +77,33 @@ const EventForm = ({ event, onSave }: IDropDownCheckboxes) => {
     setInstructors(updatedInstructors);
   };
   return (
-       <tr key={event.id}>
+    <tr key={event.id}>
+      <td>
+        <p>Salary:</p>
+        <div className="checkbox-btn-row">
+          <input
+            className="event-checkbox"
+            type="checkbox"
+            name="salary-input"
+            id="salary-input-yes"
+            checked={event.calculateSalary}
+          />
+          <label htmlFor="salary-input-yes">Yes</label>
+        </div>  
+      </td>
+      <td>
+        <p>Rent:</p>
+        <div className="checkbox-btn-row">
+          <input
+            className="event-checkbox"
+            type="checkbox"
+            name="rent-input"
+            id="rent-input"
+            checked={event.addRent}
+          />
+          <label htmlFor="rent-input">Yes</label>
+        </div>
+      </td>
       <td className="event-name-column">
         <p>{event.eventName}</p>
       </td>
@@ -59,15 +111,42 @@ const EventForm = ({ event, onSave }: IDropDownCheckboxes) => {
         <p>{event.startDate}</p>
       </td>
       <td className="event-lessons-column">
-        <p>
+        <p className="old-value-text">
           {event.lessons} x {event.lessonLength}h
         </p>
+        <label htmlFor="lessonLength">Lessons:</label>
+        <input
+          type="number"
+          name="lessons"
+          id="lessons-input"
+          className="event-input"
+          value={lessons}
+          onChange={handleLessonsChange}
+        />
+        <label htmlFor="lessonLength">Lesson lenght:</label>
+        <input
+          type="number"
+          name="lessonLength"
+          id="lessonLength-input"
+          className="event-input"
+          value={lessonLength}
+          onChange={handleLessonLengthChange}
+        />
       </td>
       <td className="event-lesson-length-column">
         <p>{event.lessons * event.lessonLength} h</p>
       </td>
       <td className="event-price-column">
-        <input type="number" name="price" id="price-input" className="event-input"  value={event.price}/><p>SEK</p>
+        <p className="old-value-text">{event.price} SEK</p>
+        <p>Price:</p>
+        <input
+          type="number"
+          name="price"
+          id="price-input"
+          className="event-input"
+          value={price}
+          onChange={handlePriceChange}
+        />
       </td>
 
       <td className="event-instructors-column">
@@ -118,7 +197,6 @@ const EventForm = ({ event, onSave }: IDropDownCheckboxes) => {
         </div>
       </td>
     </tr>
-   
   );
 };
 
