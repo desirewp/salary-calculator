@@ -9,8 +9,9 @@ interface IDropDownCheckboxes {
 
 const EventForm = ({ event, onSave }: IDropDownCheckboxes) => {
   // Fyll på med fält när formuläret byggs ut
-
-  const [calculateSalary, setCalculateSalary] = useState<boolean>(event.calculateSalary);
+  const [calculateSalary, setCalculateSalary] = useState<boolean>(
+    event.calculateSalary
+  );
   const [addRent, setAddRent] = useState<boolean>(event.addRent);
   const [lessons, setLessons] = useState<number>(event.lessons);
   const [lessonLength, setLessonLength] = useState<number>(event.lessonLength);
@@ -21,13 +22,13 @@ const EventForm = ({ event, onSave }: IDropDownCheckboxes) => {
   const handleSaveChanges = () => {
     const updatedEvent = new Event(
       event.id,
-      event.addRent,
-      event.calculateSalary,
+      addRent,
+      calculateSalary,
       event.eventName,
       event.startDate,
       lessons,
       lessonLength,
-      event.price,
+      price,
       instructors,
       false //Stänger edit mode
     );
@@ -48,6 +49,16 @@ const EventForm = ({ event, onSave }: IDropDownCheckboxes) => {
       false //Stänger edit mode
     );
     onSave(updatedEvent);
+  };
+
+  const handleCalculateSalaryChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setCalculateSalary(event.target.checked);
+  };
+
+  const handleAddRentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAddRent(event.target.checked);
   };
 
   const handleLessonsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,10 +97,11 @@ const EventForm = ({ event, onSave }: IDropDownCheckboxes) => {
             type="checkbox"
             name="salary-input"
             id="salary-input-yes"
-            checked={event.calculateSalary}
+            checked={calculateSalary}
+            onChange={handleCalculateSalaryChange}
           />
           <label htmlFor="salary-input-yes">Yes</label>
-        </div>  
+        </div>
       </td>
       <td>
         <p>Rent:</p>
@@ -99,7 +111,8 @@ const EventForm = ({ event, onSave }: IDropDownCheckboxes) => {
             type="checkbox"
             name="rent-input"
             id="rent-input"
-            checked={event.addRent}
+            checked={addRent}
+            onChange={handleAddRentChange}
           />
           <label htmlFor="rent-input">Yes</label>
         </div>

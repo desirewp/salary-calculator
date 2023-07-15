@@ -43,7 +43,7 @@ const Sidebar = ({ openHelp }: ISidebar) => {
           </li>
           <li>
             <Link to={`/project/${projectId}/event-data`}>
-              {completed(false)} Control events
+              {completed(false)} Events
             </Link>
           </li>
           <li>

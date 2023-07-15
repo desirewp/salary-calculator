@@ -55,16 +55,6 @@ const Events = () => {
     toggleEditUI(eventId);
   };
 
-  const handleSaveChangesClick = (e: React.FormEvent, eventId: string) => {
-    alert("nu ska saker sparas!");
-    // Nu sakans funktion som trycker in det nya eventet i events från
-    toggleEditUI(eventId);
-  };
-
-  const handleUndoChangesClick = (eventId: string) => {
-    toggleEditUI(eventId);
-  };
-
   return (
     <section className="content">
       <div className="box">
@@ -191,8 +181,11 @@ const Events = () => {
         </table>
       </div>
       <div className="box">
-        <p>Fortsätt jobba på att få till funktionalitet på salary & rent checkbox</p>
-        <p>Sedan fokusera på att kunna lägge till ett nytt event (använd denna låda då för tillfället)</p>
+       
+        <p>
+          Sedan fokusera på att kunna lägge till ett nytt event (använd denna
+          låda då för tillfället)
+        </p>
       </div>
     </section>
   );
