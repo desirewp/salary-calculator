@@ -18,6 +18,10 @@ th {
   text-align: left;
 }
 
+tr {
+  height: 45px;
+}
+
 .events-table tr:nth-child(odd) {
   background: #1f1f1f;
 }
@@ -52,7 +56,38 @@ tr:hover .edit-icon {
   display: block;
 }
 
-.action-column{
- width: 35px;
+/* -------- column width----------- */
+.event-name-column {
+  min-width: 35px;
+  width: 25%;
+}
 
+.event-startdate-column {
+  min-width: 20px;
+  width: 15%;
+}
+
+.event-lessons-column {
+  min-width: 20px;
+  width: 10%;
+}
+
+.event-lesson-length-column {
+  min-width: 20px;
+  width: 8%;
+}
+
+.event-price-column {
+  min-width: 20px;
+  width: 11%;
+}
+
+.event-instructors-column {
+  min-width: 20px;
+  width: 25%;
+}
+
+.action-column {
+  min-width: 35px;
+  width: 6%;
 }

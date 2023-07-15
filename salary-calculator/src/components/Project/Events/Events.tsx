@@ -72,7 +72,7 @@ const Events = () => {
         <table className="events-table">
           <thead>
             <tr>
-              <th>
+              <th className="event-name-column">
                 <p>
                   Event
                   <span className="material-symbols-outlined">
@@ -80,7 +80,7 @@ const Events = () => {
                   </span>
                 </p>
               </th>
-              <th>
+              <th className="event-startdate-column">
                 <p>
                   Start date
                   <span className="material-symbols-outlined">
@@ -88,7 +88,7 @@ const Events = () => {
                   </span>
                 </p>
               </th>
-              <th>
+              <th className="event-lessons-column">
                 <p>
                   Lessons
                   <span className="material-symbols-outlined">
@@ -96,7 +96,7 @@ const Events = () => {
                   </span>
                 </p>
               </th>
-              <th>
+              <th className="event-lesson-length-column">
                 <p>
                   Length
                   <span className="material-symbols-outlined">
@@ -104,7 +104,7 @@ const Events = () => {
                   </span>
                 </p>
               </th>
-              <th>
+              <th className="event-price-column">
                 <p>
                   Price
                   <span className="material-symbols-outlined">
@@ -112,7 +112,7 @@ const Events = () => {
                   </span>
                 </p>
               </th>
-              <th>
+              <th className="event-instructors-column">
                 <p>
                   Instructors
                   <span className="material-symbols-outlined">
@@ -127,24 +127,24 @@ const Events = () => {
             {events.map((event) => {
               return !event.edit ? (
                 <tr key={event.id}>
-                  <td>
+                  <td className="event-name-column">
                     <p>{event.eventName}</p>
                   </td>
-                  <td>
+                  <td className="event-startdate-column">
                     <p>{event.startDate}</p>
                   </td>
-                  <td>
+                  <td className="event-lesson-column">
                     <p>
                       {event.lessons} x {event.lessonLength}h
                     </p>
                   </td>
-                  <td>
+                  <td className="event-lesson-length-column">
                     <p>{event.lessons * event.lessonLength} h</p>
                   </td>
-                  <td>
+                  <td className="event-price-column">
                     <p>{event.price} SEK</p>
                   </td>
-                  <td>
+                  <td className="event-instructors-column">
                     <p>{instructorData(event.instructors)}</p>
                   </td>
                   <td className="action-column">

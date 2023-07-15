@@ -51,28 +51,26 @@ const EventForm = ({ event, onSave }: IDropDownCheckboxes) => {
     setInstructors(updatedInstructors);
   };
   return (
-    // <form onSubmit={handleSaveChanges}>
-    <tr key={event.id}>
-      <td>
+       <tr key={event.id}>
+      <td className="event-name-column">
         <p>{event.eventName}</p>
       </td>
-      <td>
+      <td className="event-startdate-column">
         <p>{event.startDate}</p>
       </td>
-      <td>
+      <td className="event-lessons-column">
         <p>
           {event.lessons} x {event.lessonLength}h
         </p>
       </td>
-      <td>
+      <td className="event-lesson-length-column">
         <p>{event.lessons * event.lessonLength} h</p>
       </td>
-      <td>
-        <p>{event.price} SEK</p>
-        <input type="number" name="price" id="price-input"  value={event.price}/>
+      <td className="event-price-column">
+        <input type="number" name="price" id="price-input" className="event-input"  value={event.price}/><p>SEK</p>
       </td>
 
-      <td>
+      <td className="event-instructors-column">
         {/* Instruktör input */}
         <div className="checkbox-select">
           <ul>
@@ -120,7 +118,7 @@ const EventForm = ({ event, onSave }: IDropDownCheckboxes) => {
         </div>
       </td>
     </tr>
-    // </form>
+   
   );
 };
 
