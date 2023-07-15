@@ -1,11 +1,17 @@
 import { useState } from "react";
-import { Event, eventsVT22, instructors2023 } from "../../../assets/Classes";
+import {
+  Event,
+  Instructor,
+  eventsVT22,
+  instructors2023,
+} from "../../../assets/Classes";
 import "./Events.css";
 import EventForm from "../../EventForm/EventForm";
 
 const Events = () => {
   // Innehåller de Events som visas aka ordinarie event[]
   const [events, setEvents] = useState<Event[]>(eventsVT22);
+  const instructors: Instructor[] = instructors2023;
 
   // Lägger till det nya uppdaterade eventet med de andra
   const handleSaveEvent = (updatedEvent: Event) => {
@@ -15,6 +21,10 @@ const Events = () => {
       } else return event;
     });
     setEvents(updatedEvents);
+  };
+
+  const newEvent = () => {
+    alert("New event says Bop!");
   };
 
   // ------------ UI -DESSA FUNGERAR-------------------
@@ -181,11 +191,63 @@ const Events = () => {
         </table>
       </div>
       <div className="box">
-       
         <p>
           Sedan fokusera på att kunna lägge till ett nytt event (använd denna
           låda då för tillfället)
         </p>
+        <form action="addEvent">
+          <label htmlFor="event-name-input">Event name</label>
+          <input type="text" id="event-name" name="event-name-input" />
+
+          <label htmlFor="event-start-date-input">Start date</label>
+          <input type="date" />
+
+          <label htmlFor="lessonLength">Lessons:</label>
+          <input
+            type="number"
+            name="lessons"
+            id="lessons-input"
+            className="event-input"
+            placeholder="1"
+          />
+          <label htmlFor="lessonLength">Lesson length:</label>
+          <input
+            type="number"
+            name="lessonLength"
+            id="lessonLength-input"
+            className="event-input"
+            placeholder="1,5"
+          />
+          <label htmlFor="event-price-input">Price:</label>
+          <input
+            type="number"
+            name="event-price"
+            id="event-price-input"
+            className="event-input"
+            placeholder="800"
+          />
+
+          <div className="checkbox-select">
+            <ul>
+              {instructors2023.map((instructor) => {
+                return (
+                  <li key={instructor.id}>
+                    <div className="list-item-container" >
+                      <input
+                        type="checkbox"
+                        id={instructor.id}
+                        value={instructor.id}
+                      />
+                      <label htmlFor={instructor.id}>
+                        {instructor.fullName}
+                      </label>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </form>
       </div>
     </section>
   );
