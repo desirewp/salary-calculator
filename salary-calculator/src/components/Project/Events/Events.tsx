@@ -191,10 +191,7 @@ const Events = () => {
         </table>
       </div>
       <div className="box">
-        <p>
-          Sedan fokusera på att kunna lägge till ett nytt event (använd denna
-          låda då för tillfället)
-        </p>
+        <h1>Add new event</h1>
         <form action="addEvent">
           <label htmlFor="event-name-input">Event name</label>
           <input type="text" id="event-name" name="event-name-input" />
