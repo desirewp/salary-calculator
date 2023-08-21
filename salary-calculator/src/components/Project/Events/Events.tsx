@@ -6,6 +6,7 @@ import {
   instructors2023,
 } from "../../../assets/Classes";
 import "./Events.css";
+import Select from "react-select";
 import EventForm from "../../EventForm/EventForm";
 
 const Events = () => {
@@ -23,9 +24,16 @@ const Events = () => {
     setEvents(updatedEvents);
   };
 
-  const newEvent = () => {
+  const addEvent = (event: React.FormEvent) => {
+    event.preventDefault();
     alert("New event says Bop!");
   };
+
+  // ------- Alternativen för dropdownen------------
+  const instructorOptions = instructors.map((instructor) => ({
+    value: instructor.id,
+    label: instructor.fullName,
+  }));
 
   // ------------ UI -DESSA FUNGERAR-------------------
   const toggleEditUI = (eventId: string) => {
@@ -190,9 +198,11 @@ const Events = () => {
           </tbody>
         </table>
       </div>
+
+      {/* ------------- Add event form starts --------------- */}
       <div className="box">
         <h1>Add new event</h1>
-        <form action="addEvent">
+        <form onSubmit={addEvent} className="add-event">
           <label htmlFor="event-name-input">Event name</label>
           <input type="text" id="event-name" name="event-name-input" />
 
@@ -204,7 +214,7 @@ const Events = () => {
             type="number"
             name="lessons"
             id="lessons-input"
-            className="event-input"
+            // className="event-input"
             placeholder="1"
           />
           <label htmlFor="lessonLength">Lesson length:</label>
@@ -212,7 +222,7 @@ const Events = () => {
             type="number"
             name="lessonLength"
             id="lessonLength-input"
-            className="event-input"
+            // className="event-input"
             placeholder="1,5"
           />
           <label htmlFor="event-price-input">Price:</label>
@@ -220,34 +230,24 @@ const Events = () => {
             type="number"
             name="event-price"
             id="event-price-input"
-            className="event-input"
+            // className="event-input"
             placeholder="800"
           />
-
-          <div className="">
-            <ul className="instructor-list">
-              {instructors2023.map((instructor) => {
-                return (
-                  <li key={instructor.id}>
-                    <div className="instructor-container" >
-                      <input
-                        type="checkbox"
-                        id={instructor.id}
-                        value={instructor.id}
-                      />
-                      <label htmlFor={instructor.id}>
-                        {instructor.fullName}
-                      </label>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
+          <div className="instructor-select-container">
+            {/* Kommer från: https://react-select.com/home */}
+            <label htmlFor="instructor-select">Instructors:</label>
+            <Select
+              id="instructor-select"
+              isMulti
+              name="colors"
+              options={instructorOptions}
+              className="basic-multi-select"
+              classNamePrefix="select"
+            />
           </div>
-
-
-
-
+          <div className="float-right">
+            <button type="submit">Add</button>
+          </div>
         </form>
       </div>
     </section>

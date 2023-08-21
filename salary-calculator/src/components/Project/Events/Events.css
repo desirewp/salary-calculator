@@ -65,22 +65,16 @@ tr:hover .edit-icon {
 
 
 /* ---------- Add event ------------ */
-.instructor-list{
-display: flex;
-flex-flow: wrap;
-max-height: 100px;
-overflow-y: auto;
+.instructor-select-container{
+  margin-top: 1rem;
+  /* Ändra här för att minska bredd på den importerade selecten */
+  width: 80%;
 }
 
-.instructor-container{
-  margin: 0;
-  padding: 0 5px;
+.float-right{
   display: flex;
-  align-items: center;
-  max-height: 20px;
+  justify-content: right;
 }
-
-
 
 
 /* -------- column width----------- */
