@@ -224,12 +224,12 @@ const Events = () => {
             placeholder="800"
           />
 
-          <div className="checkbox-select">
-            <ul>
+          <div className="">
+            <ul className="instructor-list">
               {instructors2023.map((instructor) => {
                 return (
                   <li key={instructor.id}>
-                    <div className="list-item-container" >
+                    <div className="instructor-container" >
                       <input
                         type="checkbox"
                         id={instructor.id}
@@ -244,6 +244,10 @@ const Events = () => {
               })}
             </ul>
           </div>
+
+
+
+
         </form>
       </div>
     </section>
